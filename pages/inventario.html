@@ -1,0 +1,140 @@
+<!-- pages/inventario.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión MASS - Inventario</title>
+  
+  <!-- Estilos comunes y específicos -->
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../styles/common.css">
+  <link rel="stylesheet" href="../styles/inventario.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../assets/store-icon-flat-design-by-Vexels.svg" alt="Logo MASS" width="30" height="30">
+            <span>MASS</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="main.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="inventario.html" class="active">Inventario</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="reportes.html">Reportes</a></li>
+            </ul>
+        </nav>
+        <div class="user-dropdown">
+            <div class="user-info">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                <span id="userInfo">Admin</span>
+            </div>
+            <div class="user-dropdown-content">
+                <a href="perfil.html">Ver Perfil</a>
+                <a href="configuracion.html">Configuración</a>
+                <a href="ayuda.html">Ayuda</a>
+                <hr style="margin: 0;">
+                <a href="login.html" id="logoutButton">Cerrar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>Control de Inventario</h2>
+        <div class="filters-actions">
+            <input type="text" id="buscarProducto" placeholder="Buscar por nombre o código...">
+            <select id="categoriaFilter"><option value="">Todas las Categorías</option></select>
+            <select id="estadoStockFilter"><option value="">Todos los Estados</option></select>
+            <button id="ajustarStockBtn">Ajustar Stock</button>
+            <button id="exportarExcelBtn">Exportar a Excel</button>
+        </div>
+        <div class="inventory-table-container">
+            <table class="inventory-table">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Stock Actual</th>
+                    <th>Stock Mínimo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Las filas se insertarán aquí con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <button id="prevPage" disabled><</button>
+            <span id="pageInfo">Página 1 de 1</span>
+            <button id="nextPage" disabled>></button>
+        </div>
+    </main>
+    
+    <!-- Modals -->
+    <div id="ajustarStockModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>Ajuste de Stock</h2>
+            <form id="ajusteStockForm">
+                <label for="ajusteProducto">Producto</label>
+                <select id="ajusteProducto" name="producto" required></select>
+                <label for="tipoAjuste">Tipo de Ajuste</label>
+                <select id="tipoAjuste" name="tipoAjuste"><option value="entrada">Entrada</option><option value="salida">Salida</option></select>
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" name="cantidad" required min="1">
+                <label for="motivo">Motivo</label>
+                <input type="text" id="motivo" name="motivo" placeholder="Ej: Merma, Conteo físico, etc.">
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar Ajuste</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editarStockMinimoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>Editar Stock Mínimo</h2>
+            <form id="editarStockMinimoForm">
+                <input type="hidden" id="editProductId">
+                <label for="editProductName">Producto</label>
+                <input type="text" id="editProductName" readonly>
+                <label for="editStockActual">Stock Actual</label>
+                <input type="number" id="editStockActual" readonly>
+                <label for="editStockMinimo">Nuevo Stock Mínimo</label>
+                <input type="number" id="editStockMinimo" required min="0">
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="historialMovimientosModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>Historial de Movimientos</h2>
+            <h3 id="historyProductName"></h3>
+            <table class="inventory-table">
+                <thead><tr><th>Fecha</th><th>Tipo</th><th>Cantidad</th><th>Stock Resultante</th><th>Motivo</th></tr></thead>
+                <tbody><tr><td colspan="5">Ejemplo: 2024-03-15 | Entrada | +50 | 150 | Compra a proveedor</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>© 2025 Mass - Todos los derechos reservados</footer>
+
+    <!-- Scripts comunes y específicos -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../scripts/shared.js"></script>
+    <script src="../scripts/inventario.js"></script>
+</body>
+</html>

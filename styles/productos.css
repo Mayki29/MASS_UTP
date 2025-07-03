@@ -1,0 +1,182 @@
+/* styles/productos.css */
+/* Estilos específicos para la página de gestión de productos */
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main h2 {
+    color: #004AAD;
+    border-bottom: 2px solid #FFC300;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#abrirModalBtn {
+    background-color: #004AAD;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+#abrirModalBtn:hover {
+    background-color: #003478;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Diseño responsive */
+    gap: 20px;
+}
+
+.product {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.product img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.product h3 {
+    color: #004AAD;
+    font-size: 1.1em;
+    margin-top: 0;
+    flex-grow: 1; /* Hace que el título ocupe el espacio disponible */
+}
+
+.product .price {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+}
+
+.product p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.product-actions {
+    margin-top: 10px;
+}
+
+.product-actions button {
+    background-color: #5a6268;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.product-actions button.delete {
+    background-color: #dc3545;
+}
+.product-actions button:hover {
+    opacity: 0.8;
+}
+
+/* --- ESTILOS PARA EL MODAL --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 2% auto;
+    padding: 25px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+}
+.modal-content h2 {
+    color: #004AAD;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-btn:hover, .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#productForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+#productForm label {
+  color: #333;
+  font-weight: bold;
+  grid-column: span 2; /* Las etiquetas ocupan todo el ancho */
+  margin-bottom: -10px; /* Reduce el espacio con el input */
+}
+
+#productForm input, #productForm select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    grid-column: span 2;
+    box-sizing: border-box;
+}
+
+#productForm .form-actions {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#productForm button {
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#guardarBtn { background-color: #004AAD; }
+#cancelarBtn { background-color: #6c757d; }

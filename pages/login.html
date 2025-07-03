@@ -1,0 +1,57 @@
+<!-- pages/login.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión MASS</title>
+
+    <!-- Ruta actualizada: sube un nivel (../) y entra a styles/ -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="stylesheet" href="../styles/login.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <!-- Ruta actualizada: sube un nivel (../) y entra a assets/ -->
+            <img src="../assets/store-icon-flat-design-by-Vexels.svg" alt="Logo MASS">
+        </div>
+        <h2>Sistema de Gestión MASS</h2>
+
+        <form id="loginForm">
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario" name="usuario" required>
+
+            <label for="contraseña">Contraseña</label>
+            <div class="input-group">
+                <input type="password" id="contraseña" name="contraseña" required>
+                <span class="toggle-password">
+                    <span id="toggleIcon">
+                        <!-- Icono SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    </span>
+                </span>
+            </div>
+
+            <label for="tienda">Tienda</label>
+            <select id="tienda" name="tienda" required>
+                <option value="">Seleccione una tienda</option>
+                <option value="tienda1">Tienda 1</option>
+                <option value="tienda2">Tienda 2</option>
+                <option value="tienda3">Tienda 3</option>
+            </select>
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <!-- Ruta actualizada: sube un nivel (../) y entra a scripts/ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../scripts/login.js"></script>
+
+</body>
+</html>

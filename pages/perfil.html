@@ -1,0 +1,85 @@
+<!-- pages/perfil.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - MASS</title>
+    <!-- Estilos -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/perfil.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../assets/store-icon-flat-design-by-Vexels.svg" alt="Logo MASS" width="30" height="30">
+            <span>MASS</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="main.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="inventario.html">Inventario</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="reportes.html">Reportes</a></li>
+            </ul>
+        </nav>
+        <div class="user-dropdown">
+            <div class="user-info">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                <span id="userInfo">Admin</span>
+            </div>
+            <div class="user-dropdown-content">
+                <a href="perfil.html" style="font-weight: bold;" >Ver Perfil</a>
+                <a href="configuracion.html">Configuración</a>
+                <a href="ayuda.html">Ayuda</a>
+                <hr style="margin: 0;">
+                <a href="login.html" id="logoutButton">Cerrar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Mi Perfil</h1>
+            <div class="profile-header">
+                <img src="../assets/Foto_Perfil.avif" alt="Foto de Perfil" class="profile-picture" id="profilePicture">
+                <div class="profile-info">
+                    <h2 id="userName">Cargando...</h2>
+                    <p id="userStore">Tienda: Cargando...</p>
+                </div>
+            </div>
+
+            <div class="profile-details">
+                <div>
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Ej: juan.perez@example.com">
+                </div>
+                <div>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" placeholder="Ej: 987654321">
+                </div>
+                <div>
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" placeholder="Ej: Av. Principal 123">
+                </div>
+                <div class="form-actions">
+                    <button id="guardarCambiosBtn">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>© 2025 Mass - Todos los derechos reservados</footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/shared.js"></script>
+    <script src="../scripts/perfil.js"></script>
+</body>
+</html>

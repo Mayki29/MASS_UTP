@@ -1,0 +1,106 @@
+/* styles/ayuda.css */
+
+main {
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px 30px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+}
+
+.container h1 {
+    color: #004AAD;
+    border-bottom: 2px solid #FFC300;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.help-section {
+    margin-bottom: 30px;
+}
+
+.help-section h2 {
+    color: #333;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    border-left: 4px solid #004AAD;
+    padding-left: 10px;
+}
+
+/* Estilos para el acordeón de FAQ */
+.faq-item {
+    border-bottom: 1px solid #eee;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 15px 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.faq-question:hover {
+    background-color: #f8f9fa;
+}
+
+.faq-answer {
+    padding: 0 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    background-color: #f8f9fa;
+}
+
+.faq-answer p {
+    margin: 0;
+    padding: 15px 0;
+}
+
+/* Estilos del icono del acordeón */
+.faq-question .icon {
+    transition: transform 0.3s;
+}
+.faq-item.active .faq-question .icon {
+    transform: rotate(180deg);
+}
+
+/* Estilos para el formulario de contacto */
+.contact-form {
+    display: grid;
+    gap: 15px;
+}
+.contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.contact-form button {
+    background-color: #004AAD;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-self: start; /* Alinea el botón a la izquierda */
+}

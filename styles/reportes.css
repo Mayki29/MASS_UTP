@@ -1,0 +1,153 @@
+/* styles/reportes.css */
+
+main {
+    padding: 20px;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.report-header h2 {
+    color: #333;
+    margin: 0;
+}
+
+.report-header .period-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.report-header select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* --- GRID PRINCIPAL DEL DASHBOARD --- */
+.dashboard-grid {
+    display: grid;
+    /* Define columnas flexibles que se ajustan al contenido */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- TARJETAS DE ESTADÍSTICAS (KPIs) --- */
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat-card .icon {
+    background-color: rgba(0, 74, 173, 0.1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-card .icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #004AAD;
+}
+
+.stat-info .title {
+    font-size: 14px;
+    color: #666;
+}
+
+.stat-info .value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin: 2px 0;
+}
+
+.stat-info .trend {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.trend-up { color: #28a745; }
+.trend-down { color: #dc3545; }
+.trend-neutral { color: #6c757d; }
+
+/* --- CONTENEDORES DE GRÁFICOS Y TABLA --- */
+.chart-container, .table-container {
+    /* Ocupa 2 columnas en la grid si hay espacio */
+    grid-column: span 2;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #004AAD;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* --- TABLA DE PRODUCTOS --- */
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.products-table th, .products-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.products-table th {
+    font-size: 14px;
+    color: #666;
+}
+
+.products-table td {
+    font-size: 15px;
+}
+
+.trend-icon svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+.trend-icon.up svg { fill: #28a745; }
+.trend-icon.down svg { fill: #dc3545; }
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 992px) {
+    .chart-container, .table-container {
+        grid-column: span 1; /* En pantallas medianas, ocupan 1 columna */
+    }
+}
+
+.chart-container {
+    /* Hacemos que el contenedor de la tarjeta sea un flex container en columna */
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-wrapper {
+    position: relative; /* Contexto para el canvas */
+    height: 320px;     /* ¡Esta es la clave de la solución! Le damos una altura fija. */
+    width: 100%;       /* Ocupa todo el ancho de la tarjeta */
+    flex-grow: 1;      /* Permite que ocupe el espacio vertical disponible en la tarjeta */
+}
+
+/* El canvas se ajustará automáticamente a su wrapper gracias a las opciones de Chart.js */

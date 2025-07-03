@@ -1,0 +1,107 @@
+<!-- pages/ventas.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión MASS - Ventas</title>
+    <!-- Estilos -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/ventas.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../assets/store-icon-flat-design-by-Vexels.svg" alt="Logo MASS" width="30" height="30">
+            <span>MASS</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="main.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="inventario.html">Inventario</a></li>
+                <li><a href="ventas.html" class="active">Ventas</a></li>
+                <li><a href="reportes.html">Reportes</a></li>
+            </ul>
+        </nav>
+        <div class="user-dropdown">
+            <div class="user-info">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                <span id="userInfo">Admin</span>
+            </div>
+            <div class="user-dropdown-content">
+                <a href="perfil.html">Ver Perfil</a>
+                <a href="configuracion.html">Configuración</a>
+                <a href="ayuda.html">Ayuda</a>
+                <hr style="margin: 0;">
+                <a href="login.html" id="logoutButton">Cerrar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Izquierda: Productos -->
+        <section class="products-section">
+            <div class="product-filters">
+                <input type="text" id="product-search" placeholder="Buscar producto...">
+                <button class="category-btn active">Todos</button>
+                <button class="category-btn">Abarrotes</button>
+                <button class="category-btn">Bebidas</button>
+            </div>
+            <div class="product-grid">
+                <!-- Los productos se cargarán aquí con JS -->
+            </div>
+        </section>
+
+        <!-- Sección Derecha: Carrito -->
+        <section class="cart-section">
+            <h3>Carrito de Compras</h3>
+            <div class="client-info">
+                <input type="text" id="ruc" placeholder="Buscar cliente por DNI/RUC">
+                <button id="search-client-btn">🔍</button>
+            </div>
+
+            <div class="cart-table-container">
+                <table class="cart-table">
+                    <thead>
+                        <tr><th>Producto</th><th>Cant.</th><th>P.U.</th><th>Total</th><th></th></tr>
+                    </thead>
+                    <tbody id="cart-table-body">
+                        <!-- Las filas del carrito se cargarán aquí con JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-value">S/ 0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>IGV (18%):</span>
+                    <span id="igv-value">S/ 0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>TOTAL:</span>
+                    <span id="total-value">S/ 0.00</span>
+                </div>
+            </div>
+
+            <div class="cart-actions">
+                <button id="limpiarBtn">Limpiar Carrito</button>
+                <button id="procesarVentaBtn">Procesar Venta</button>
+            </div>
+        </section>
+    </main>
+    
+    <!-- El footer puede que no sea necesario en una vista de punto de venta, pero lo mantenemos por consistencia -->
+    <!-- <footer style="position: static;">© 2025 Mass - Todos los derechos reservados</footer> -->
+    <footer>© 2025 Mass - Todos los derechos reservados</footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/shared.js"></script>
+    <script src="../scripts/ventas.js"></script>
+</body>
+</html>

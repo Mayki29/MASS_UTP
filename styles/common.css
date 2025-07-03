@@ -1,0 +1,120 @@
+/* styles/common.css */
+/* Estilos compartidos por todas las páginas internas de la aplicación */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f4f6f9; /* Un gris muy claro para el fondo general */
+    padding-bottom: 60px; /* Espacio para el footer fijo */
+}
+
+header {
+    background-color: #FFC300;
+    color: #004AAD;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Header pegajoso */
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: 8px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-left: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #004AAD;
+    font-weight: bold;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+nav a:hover, nav a.active { /* 'active' para la página actual */
+    border-color: #004AAD;
+}
+
+/* --- ESTILOS DEL DROPDOWN DE USUARIO --- */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 74, 173, 0.1);
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: #004AAD;
+    font-weight: bold;
+}
+
+.user-info svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    fill: #004AAD;
+}
+
+.user-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    right: 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.user-dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.user-dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.user-dropdown:hover .user-dropdown-content {
+    display: block;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: #004AAD;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
