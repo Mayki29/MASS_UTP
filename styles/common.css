@@ -1,24 +1,66 @@
-/* styles/common.css */
+/* styles/common.css (versión final con variables) */
 /* Estilos compartidos por todas las páginas internas de la aplicación */
 
+/* --- PALETA DE COLORES (TEMA CLARO POR DEFECTO) --- */
+:root {
+    --primary-color: #004AAD;
+    --primary-color-dark: #003478;
+    --secondary-color: #FFC300;
+
+    --bg-color: #f4f6f9;
+    --surface-color: #ffffff;
+    --border-color: #e0e0e0; /* Un poco más claro que #ddd */
+
+    --text-primary-color: #333333;
+    --text-secondary-color: #6c757d;
+    --text-on-primary-color: #ffffff;
+    --text-on-secondary-color: #333333; /* Texto para el header amarillo */
+
+    --success-color: #28a745;
+    --error-color: #dc3545;
+}
+
+/* --- DEFINICIÓN DEL TEMA OSCURO --- */
+body.dark-theme {
+    /* Fondos */
+    --bg-color: #1a1a2e;
+    --surface-color: #16213e;
+    --border-color: #3a3a3a;
+    
+    /* Textos */
+    --text-primary-color: #e9ecef;
+    --text-secondary-color: #a0a0a0;
+    
+    /* Colores de Marca AJUSTADOS para el tema oscuro */
+    --primary-color: #5378c5;
+    --primary-color-dark: #3e60a5;
+    --secondary-color: #FFC300;
+    --text-on-primary-color: #ffffff;
+    --text-on-secondary-color: #333333;
+}
+
+/* --- ESTILOS GENERALES --- */
 body {
     font-family: sans-serif;
     margin: 0;
-    background-color: #f4f6f9; /* Un gris muy claro para el fondo general */
-    padding-bottom: 60px; /* Espacio para el footer fijo */
+    background-color: var(--bg-color); /* CAMBIO */
+    color: var(--text-primary-color); /* CAMBIO: Color de texto por defecto */
+    padding-bottom: 60px;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
 
+/* --- HEADER --- */
 header {
-    background-color: #FFC300;
-    color: #004AAD;
+    background-color: var(--secondary-color);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky; /* Header pegajoso */
+    position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid var(--border-color); /* Añadido para mejor separación */
 }
 
 .logo {
@@ -26,92 +68,88 @@ header {
     font-size: 1.2em;
     display: flex;
     align-items: center;
+    color: var(--text-on-secondary-color); /* CAMBIO */
 }
-
 .logo img {
     margin-right: 8px;
 }
+.logo svg {
+    fill: var(--text-on-secondary-color); /* CAMBIO */
+}
 
+/* --- NAVEGACIÓN --- */
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
-
 nav li {
     margin-left: 25px;
 }
-
 nav a {
     text-decoration: none;
-    color: #004AAD;
+    color: var(--text-on-secondary-color); /* CAMBIO */
     font-weight: bold;
     padding-bottom: 5px;
     border-bottom: 2px solid transparent;
     transition: border-color 0.3s;
 }
-
-nav a:hover, nav a.active { /* 'active' para la página actual */
-    border-color: #004AAD;
+nav a:hover, nav a.active {
+    border-color: var(--primary-color);
 }
 
-/* --- ESTILOS DEL DROPDOWN DE USUARIO --- */
+/* --- DROPDOWN DE USUARIO --- */
 .user-dropdown {
     position: relative;
     display: inline-block;
     cursor: pointer;
 }
-
 .user-info {
     display: flex;
     align-items: center;
-    background-color: rgba(0, 74, 173, 0.1);
+    background-color: rgba(0, 74, 173, 0.1); /* Este puede quedarse así */
     border-radius: 20px;
     padding: 5px 10px;
-    color: #004AAD;
+    color: var(--primary-color); /* CAMBIO */
     font-weight: bold;
 }
-
 .user-info svg {
     width: 20px;
     height: 20px;
     margin-right: 8px;
-    fill: #004AAD;
+    fill: var(--primary-color); /* CAMBIO */
 }
-
 .user-dropdown-content {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: var(--surface-color); /* CAMBIO */
     min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 10;
     right: 0;
     border-radius: 5px;
     overflow: hidden;
+    border: 1px solid var(--border-color); /* CAMBIO */
 }
-
 .user-dropdown-content a {
-    color: #333;
+    color: var(--text-primary-color); /* CAMBIO */
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     font-size: 14px;
 }
-
 .user-dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: rgba(0,0,0,0.05); /* CAMBIO: Hover sutil para ambos temas */
 }
-
 .user-dropdown:hover .user-dropdown-content {
     display: block;
 }
 
 /* --- FOOTER --- */
 footer {
-    background-color: #004AAD;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-on-primary-color);
     text-align: center;
     padding: 15px;
     position: fixed;

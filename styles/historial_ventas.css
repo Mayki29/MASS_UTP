@@ -1,0 +1,93 @@
+/* styles/historial_ventas.css (versión con variables CSS) */
+
+main { padding: 20px; }
+
+.container { 
+    max-width: 1000px; 
+    margin: 20px auto; 
+    padding: 25px; 
+    background: var(--surface-color); /* CAMBIO */
+    border-radius: 8px; 
+    box-shadow: 0 0 15px rgba(0,0,0,0.07); 
+}
+
+h1 { /* Esta h1 está dentro del .container, no necesita color de texto explícito */
+    color: var(--primary-color); /* CAMBIO */
+    border-bottom: 2px solid var(--secondary-color); /* CAMBIO */
+    padding-bottom: 10px; 
+}
+
+.table-container { overflow-x: auto; }
+
+.history-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px; 
+}
+
+.history-table th, .history-table td { 
+    padding: 12px 15px; 
+    border-bottom: 1px solid var(--border-color); /* CAMBIO */
+    text-align: left; 
+}
+
+.history-table th { 
+    background-color: rgba(0,0,0,0.03); /* CAMBIO: Fondo sutil para ambos temas */
+    font-weight: 600; 
+    color: var(--text-primary-color); /* CAMBIO */
+}
+
+/* Color de texto para las celdas de la tabla (heredado del body) */
+
+.history-table td:last-child button { 
+    background: none; 
+    border: 1px solid var(--primary-color); /* CAMBIO */
+    color: var(--primary-color); /* CAMBIO */
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.2s, color 0.2s;
+}
+.history-table td:last-child button:hover {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary-color);
+}
+
+/* --- ESTILOS PARA EL MODAL DE DETALLES --- */
+.modal {
+    display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+    width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: var(--surface-color); /* CAMBIO */
+    margin: 5% auto; padding: 25px;
+    border-radius: 8px; width: 90%; max-width: 500px; position: relative;
+    border: 1px solid var(--border-color); /* CAMBIO */
+}
+
+.close-btn {
+    position: absolute; top: 10px; right: 20px; 
+    color: var(--text-secondary-color); /* CAMBIO */
+    font-size: 28px; font-weight: bold; cursor: pointer;
+}
+.close-btn:hover {
+    color: var(--text-primary-color); /* CAMBIO */
+}
+
+/* --- Estilos del Recibo dentro del Modal --- */
+/* MANTENEMOS ESTOS COLORES FIJOS para consistencia con la boleta de impresión */
+#receipt-container {
+    font-family: 'Courier New', Courier, monospace; 
+    color: #333; /* Color de texto fijo para el recibo */
+}
+#receipt-container .receipt-header { text-align: center; margin-bottom: 20px; }
+#receipt-container .receipt-header img { width: 50px; }
+#receipt-container h2 { margin: 5px 0; font-size: 1.2em; color: #004AAD; }
+#receipt-container .receipt-details, #receipt-container .receipt-summary { margin-bottom: 20px; padding-bottom: 10px; }
+#receipt-container p { margin: 4px 0; font-size: 0.9em; }
+#receipt-container .receipt-summary { text-align: right; border-top: 1px dashed #ccc; padding-top: 10px; }
+#receipt-container .receipt-table { width: 100%; font-size: 0.9em; border-collapse: collapse; }
+#receipt-container .receipt-table th, #receipt-container .receipt-table td { text-align: left; padding: 4px 0; }
+#receipt-container .receipt-table th { border-bottom: 1px solid #333; }
+#receipt-container .receipt-summary .total { font-weight: bold; font-size: 1.1em; border-top: 1px solid #333; }

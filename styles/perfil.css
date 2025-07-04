@@ -1,21 +1,22 @@
-/* styles/perfil.css */
+/* styles/perfil.css (versión con variables CSS) */
 
 main {
     padding: 20px;
+    /* El color de fondo es controlado por common.css */
 }
 
 .container {
     max-width: 800px;
     margin: 20px auto;
     padding: 25px 30px;
-    background-color: #fff;
+    background-color: var(--surface-color); /* CAMBIO */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
     border-radius: 8px;
 }
 
 .container h1 {
-    color: #004AAD;
-    border-bottom: 2px solid #FFC300;
+    color: var(--primary-color); /* CAMBIO */
+    border-bottom: 2px solid var(--secondary-color); /* CAMBIO */
     padding-bottom: 10px;
     margin-top: 0;
 }
@@ -32,17 +33,18 @@ main {
     border-radius: 50%;
     object-fit: cover;
     margin-right: 20px;
-    border: 3px solid #004AAD;
+    border: 3px solid var(--primary-color); /* CAMBIO */
 }
 
 .profile-info h2 {
     margin: 0;
     font-size: 1.8em;
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 .profile-info p {
     margin: 5px 0 0 0;
-    color: #555;
+    color: var(--text-secondary-color); /* CAMBIO */
     font-weight: bold;
 }
 
@@ -56,28 +58,30 @@ main {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #333;
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 .profile-details input,
 .profile-details select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color); /* CAMBIO */
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+    background-color: var(--surface-color); /* CAMBIO */
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 .form-actions {
-    grid-column: 1 / -1; /* Ocupa todas las columnas de la grid */
+    grid-column: 1 / -1;
     text-align: right;
     margin-top: 20px;
 }
 
 .form-actions button {
-    background-color: #004AAD;
-    color: white;
+    background-color: var(--primary-color); /* CAMBIO */
+    color: var(--text-on-primary-color); /* CAMBIO */
     border: none;
     padding: 12px 25px;
     border-radius: 5px;
@@ -88,5 +92,5 @@ main {
 }
 
 .form-actions button:hover {
-    background-color: #003478;
+    background-color: var(--primary-color-dark); /* CAMBIO */
 }
