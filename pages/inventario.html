@@ -13,6 +13,21 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <script>
+        // Script para aplicar el tema guardado inmediatamente
+        (function() {
+            // 1. Obtener el objeto completo de configuración
+            const settingsString = localStorage.getItem('appSettings');
+            if (settingsString) {
+                // 2. Convertirlo a un objeto JavaScript
+                const settings = JSON.parse(settingsString);
+                // 3. Si existe una preferencia de tema y es 'oscuro', aplicar la clase
+                if (settings && settings.temaVisual === 'oscuro') {
+                    document.body.classList.add('dark-theme');
+                }
+            }
+        })();
+    </script>
     <header>
         <div class="logo">
             <img src="../assets/store-icon-flat-design-by-Vexels.svg" alt="Logo MASS" width="30" height="30">
@@ -22,9 +37,10 @@
             <ul>
                 <li><a href="main.html">Inicio</a></li>
                 <li><a href="productos.html">Productos</a></li>
-                <li><a href="inventario.html" class="active">Inventario</a></li>
+                <li><a href="inventario.html">Inventario</a></li>
                 <li><a href="ventas.html">Ventas</a></li>
                 <li><a href="reportes.html">Reportes</a></li>
+                <li><a href="historial_ventas.html">Historial</a></li>
             </ul>
         </nav>
         <div class="user-dropdown">

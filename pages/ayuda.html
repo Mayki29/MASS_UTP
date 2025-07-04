@@ -9,8 +9,24 @@
     <link rel="icon" type="image/png" href="../assets/favicon.png">
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/ayuda.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <script>
+        // Script para aplicar el tema guardado inmediatamente
+        (function() {
+            // 1. Obtener el objeto completo de configuración
+            const settingsString = localStorage.getItem('appSettings');
+            if (settingsString) {
+                // 2. Convertirlo a un objeto JavaScript
+                const settings = JSON.parse(settingsString);
+                // 3. Si existe una preferencia de tema y es 'oscuro', aplicar la clase
+                if (settings && settings.temaVisual === 'oscuro') {
+                    document.body.classList.add('dark-theme');
+                }
+            }
+        })();
+    </script>
     <header>
         <!-- (El mismo header de las otras páginas) -->
         <div class="logo">
@@ -24,6 +40,7 @@
                 <li><a href="inventario.html">Inventario</a></li>
                 <li><a href="ventas.html">Ventas</a></li>
                 <li><a href="reportes.html">Reportes</a></li>
+                <li><a href="historial_ventas.html">Historial</a></li>
             </ul>
         </nav>
         <div class="user-dropdown">

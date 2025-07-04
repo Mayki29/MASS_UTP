@@ -1,0 +1,97 @@
+/* styles/registro.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+}
+.registration-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+.logo {
+    margin-bottom: 20px;
+}
+.logo img {
+    width: 60px;
+    height: 60px;
+}
+.logo h2 {
+    color: #004AAD;
+    margin-top: 10px;
+}
+.registration-container p {
+    color: #666;
+    margin-bottom: 25px;
+}
+#registroForm {
+    text-align: left;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+#registroForm button {
+    width: 100%;
+    padding: 12px;
+    background-color: #004AAD;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#registroForm button:hover {
+    background-color: #003478;
+}
+.login-link {
+    margin-top: 20px;
+}
+.login-link a {
+    color: #004AAD;
+    text-decoration: none;
+}
+.error-message {
+    color: #dc3545; /* Rojo de error */
+    font-size: 0.8em;
+    height: 1em; /* Reserva el espacio para evitar saltos de layout */
+    display: block;
+    margin-top: 4px;
+}
+
+/* Estilos para inputs con error */
+.form-group input.invalid {
+    border-color: #dc3545;
+    background-color: #fff8f8;
+}
+.form-group input.invalid:focus {
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+}
+
+/* Estilos para inputs válidos */
+.form-group input.valid {
+    border-color: #28a745; /* Verde de éxito */
+    background-color: #f8fff8;
+}
+.form-group input.valid:focus {
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
+}

@@ -1,21 +1,22 @@
-/* styles/configuracion.css */
+/* styles/configuracion.css (versión con variables CSS) */
 
 main {
     padding: 20px;
+    /* CAMBIO: El fondo principal ahora lo controla 'common.css' a través de --bg-color en el body */
 }
 
 .container {
     max-width: 800px;
     margin: 20px auto;
     padding: 25px 30px;
-    background-color: #fff;
+    background-color: var(--surface-color); /* CAMBIO: de #fff a variable */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
     border-radius: 8px;
 }
 
 .container h1 {
-    color: #004AAD;
-    border-bottom: 2px solid #FFC300;
+    color: var(--primary-color); /* CAMBIO: de #004AAD a variable */
+    border-bottom: 2px solid var(--secondary-color); /* CAMBIO: de #FFC300 a variable */
     padding-bottom: 10px;
     margin-top: 0;
 }
@@ -25,10 +26,10 @@ main {
 }
 
 .settings-section h2 {
-    color: #333;
+    color: var(--text-primary-color); /* CAMBIO: de #333 a variable */
     font-size: 1.3em;
     margin-bottom: 15px;
-    border-left: 4px solid #004AAD;
+    border-left: 4px solid var(--primary-color); /* CAMBIO: de #004AAD a variable */
     padding-left: 10px;
 }
 
@@ -37,7 +38,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-color); /* CAMBIO: de #f0f0f0 a variable */
 }
 
 .setting-item:last-child {
@@ -46,15 +47,18 @@ main {
 
 .setting-item label {
     font-weight: 500;
+    color: var(--text-primary-color); /* CAMBIO: añadido color variable */
 }
 
 .setting-item input[type="text"],
 .setting-item input[type="number"],
 .setting-item select {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color); /* CAMBIO */
     border-radius: 5px;
-    width: 200px; /* Ancho fijo para los inputs */
+    width: 200px;
+    background-color: var(--surface-color); /* CAMBIO */
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 /* Estilo para los interruptores (toggle switches) */
@@ -87,12 +91,12 @@ main {
     width: 20px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: white; /* CAMBIO: Dejamos el círculo blanco en ambos temas */
     transition: .4s;
     border-radius: 50%;
 }
 input:checked + .slider {
-    background-color: #004AAD;
+    background-color: var(--primary-color); /* CAMBIO */
 }
 input:checked + .slider:before {
     transform: translateX(22px);
@@ -103,8 +107,8 @@ input:checked + .slider:before {
     margin-top: 20px;
 }
 .form-actions button {
-    background-color: #004AAD;
-    color: white;
+    background-color: var(--primary-color); /* CAMBIO */
+    color: var(--text-on-primary-color); /* CAMBIO */
     border: none;
     padding: 12px 25px;
     border-radius: 5px;
@@ -114,5 +118,5 @@ input:checked + .slider:before {
     transition: background-color 0.3s;
 }
 .form-actions button:hover {
-    background-color: #003478;
+    background-color: var(--primary-color-dark); /* CAMBIO */
 }
