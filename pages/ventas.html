@@ -12,21 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <script>
-        // Script para aplicar el tema guardado inmediatamente
-        (function() {
-            // 1. Obtener el objeto completo de configuración
-            const settingsString = localStorage.getItem('appSettings');
-            if (settingsString) {
-                // 2. Convertirlo a un objeto JavaScript
-                const settings = JSON.parse(settingsString);
-                // 3. Si existe una preferencia de tema y es 'oscuro', aplicar la clase
-                if (settings && settings.temaVisual === 'oscuro') {
-                    document.body.classList.add('dark-theme');
-                }
-            }
-        })();
-    </script>
     <header>
         <div class="logo">
             <img src="../assets/store-icon-flat-design-by-Vexels.svg" alt="Logo MASS" width="30" height="30">
@@ -37,9 +22,8 @@
                 <li><a href="main.html">Inicio</a></li>
                 <li><a href="productos.html">Productos</a></li>
                 <li><a href="inventario.html">Inventario</a></li>
-                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="ventas.html" class="active">Ventas</a></li>
                 <li><a href="reportes.html">Reportes</a></li>
-                <li><a href="historial_ventas.html">Historial</a></li>
             </ul>
         </nav>
         <div class="user-dropdown">
@@ -75,10 +59,7 @@
         <section class="cart-section">
             <h3>Carrito de Compras</h3>
             <div class="client-info">
-                <input type="text" id="ruc" placeholder="Ingresar DNI (8) o RUC (11)" 
-                maxlength="11" 
-                pattern="[0-9]*" 
-                inputmode="numeric">
+                <input type="text" id="ruc" placeholder="Buscar cliente por DNI/RUC">
                 <button id="search-client-btn">🔍</button>
             </div>
 
@@ -102,11 +83,6 @@
                     <span>IGV (18%):</span>
                     <span id="igv-value">S/ 0.00</span>
                 </div>
-                <!--Cliente exclusivo-->
-                <div class="summary-row discount" id="discount-row" style="display: none;">
-                    <span>Descuento Cliente (5%):</span>
-                    <span id="discount-value">- S/ 0.00</span>
-                </div>
                 <div class="summary-row total">
                     <span>TOTAL:</span>
                     <span id="total-value">S/ 0.00</span>
@@ -119,74 +95,7 @@
             </div>
         </section>
     </main>
-    <!-- (Justo antes del tag <footer>) -->
-    <!-- Modal de Pago -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">×</span>
-            <h2>Procesar Pago</h2>
-            <div class="payment-summary">
-                <span>Total a Pagar:</span>
-                <strong id="modal-total-value">S/ 0.00</strong>
-            </div>
-            <form id="paymentForm">
-                <label for="paymentMethod">Método de Pago</label>
-                <select id="paymentMethod">
-                    <option value="efectivo">Efectivo</option>
-                    <option value="tarjeta">Tarjeta de Crédito/Débito</option>
-                </select>
-                <div id="card-details" style="display: none;">
-                    <label for="cardNumber">Número de Tarjeta</label>
-                    <input type="text" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx">
-                </div>
-                <button type="submit" id="confirmPaymentBtn">Confirmar Pago</button>
-            </form>
-        </div>
-    </div>
-    <div id="receiptModal" class="modal">
-        <div class="modal-content receipt-content">
-            <span class="close-btn">×</span>
-            <div id="receipt-to-print">
-                <div class="receipt-header">
-                    <img src="../assets/store-icon-flat-design-by-Vexels.svg" alt="Logo MASS" width="50">
-                    <h2>Boleta de Venta</h2>
-                    <p>Tiendas MASS</p>
-                </div>
-                <div class="receipt-details">
-                    <p><strong>Nro. Venta:</strong> <span id="receipt-id"></span></p>
-                    <p><strong>Fecha:</strong> <span id="receipt-date"></span></p>
-                    <p><strong>Cliente:</strong> <span id="receipt-client"></span></p>
-                </div>
-                <table class="receipt-table">
-                    <thead>
-                        <tr>
-                            <th>Cant.</th>
-                            <th>Descripción</th>
-                            <th>P.U.</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="receipt-items-body">
-                        <!-- Los items de la venta se insertarán aquí -->
-                    </tbody>
-                </table>
-                <div class="receipt-summary">
-                    <p><strong>Subtotal:</strong> <span id="receipt-subtotal"></span></p>
-                    <p><strong>IGV (18%):</strong> <span id="receipt-igv"></span></p>
-                    <p class="discount" id="receipt-discount-row" style="display: none;">
-                        <strong>Descuento:</strong> <span id="receipt-discount"></span>
-                    </p>
-                    <p class="total"><strong>TOTAL A PAGAR:</strong> <span id="receipt-total"></span></p>
-                </div>
-                <div class="receipt-footer">
-                    <p>¡Gracias por su compra!</p>
-                </div>
-            </div>
-            <div class="receipt-actions">
-                <button id="printReceiptBtn">Imprimir Recibo</button>
-            </div>
-        </div>
-    </div>
+    
     <!-- El footer puede que no sea necesario en una vista de punto de venta, pero lo mantenemos por consistencia -->
     <!-- <footer style="position: static;">© 2025 Mass - Todos los derechos reservados</footer> -->
     <footer>© 2025 Mass - Todos los derechos reservados</footer>

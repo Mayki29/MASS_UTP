@@ -1,6 +1,9 @@
 /* scripts/inventario.js */
+const supabaseUrl = 'https://wgivejkvpksrcwmgclrp.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndnaXZlamt2cGtzcmN3bWdjbHJwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0MjEyMjcsImV4cCI6MjA2Njk5NzIyN30.mzyEwKXTbFpwyQdrR8w-Wdwx8A4-hnmxUUeNjCCOUtk';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // 1. Proteger la página y cargar datos compartidos
     checkUserSession();
 
@@ -16,10 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Estado de la aplicación
     // Usamos los productos de localStorage como nuestra fuente de datos
-    let inventario = (JSON.parse(localStorage.getItem('productos')) || []).map(p => ({
-        ...p,
-        stockMinimo: p.stockMinimo || 20 // Añadir un stock mínimo por defecto si no existe
-    }));
+    const { data, error } = await supabase
+      .from('productos')
+      .select(`
+        *,
+        categorias (
+          nombre,
+          descripcion
+        )
+      `);
+
+      
+    
+    if (error) {
+      console.error('Error al obtener productos con categorías:', error.message);
+    } else {
+      console.log('Productos con categorías:', data);
+    }
+
+    let inventario = data;
 
     // --- FUNCIONES ---
 
@@ -33,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         inventario.forEach(item => {
             const stockActual = parseInt(item.stock);
-            const stockMinimo = parseInt(item.stockMinimo);
+            const stockMinimo = parseInt(item.stock_minimo);
             let estado = { text: 'Normal', class: 'status-normal' };
 
             if (stockActual <= stockMinimo) {
@@ -47,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             row.innerHTML = `
                 <td>${item.id.toString().padStart(3, '0')}</td>
                 <td>${item.nombre}</td>
-                <td>${item.categoria || 'N/A'}</td>
+                <td>${item.categorias.nombre || 'N/A'}</td>
                 <td>${stockActual}</td>
                 <td>${stockMinimo}</td>
                 <td><span class="status-badge ${estado.class}">${estado.text}</span></td>

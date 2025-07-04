@@ -1,4 +1,5 @@
-/* styles/productos.css (versión con variables CSS) */
+/* styles/productos.css */
+/* Estilos específicos para la página de gestión de productos */
 
 main {
     padding: 20px;
@@ -7,15 +8,15 @@ main {
 }
 
 main h2 {
-    color: var(--primary-color); /* CAMBIO */
-    border-bottom: 2px solid var(--secondary-color); /* CAMBIO */
+    color: #004AAD;
+    border-bottom: 2px solid #FFC300;
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
 #abrirModalBtn {
-    background-color: var(--primary-color); /* CAMBIO */
-    color: var(--text-on-primary-color); /* CAMBIO */
+    background-color: #004AAD;
+    color: white;
     border: none;
     padding: 12px 20px;
     border-radius: 5px;
@@ -26,18 +27,18 @@ main h2 {
 }
 
 #abrirModalBtn:hover {
-    background-color: var(--primary-color-dark); /* CAMBIO */
+    background-color: #003478;
 }
 
 .product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Diseño responsive */
     gap: 20px;
 }
 
 .product {
-    background-color: var(--surface-color); /* CAMBIO */
-    border: 1px solid var(--border-color); /* CAMBIO */
+    background-color: white;
+    border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -54,21 +55,21 @@ main h2 {
 }
 
 .product h3 {
-    color: var(--primary-color); /* CAMBIO */
+    color: #004AAD;
     font-size: 1.1em;
     margin-top: 0;
-    flex-grow: 1;
+    flex-grow: 1; /* Hace que el título ocupe el espacio disponible */
 }
 
 .product .price {
     font-size: 1.3em;
     font-weight: bold;
-    color: var(--text-primary-color); /* CAMBIO */
+    color: #333;
 }
 
 .product p {
     font-size: 0.9em;
-    color: var(--text-secondary-color); /* CAMBIO */
+    color: #666;
     margin: 5px 0;
 }
 
@@ -77,8 +78,8 @@ main h2 {
 }
 
 .product-actions button {
-    background-color: var(--text-secondary-color); /* CAMBIO: Color genérico para botones de acción */
-    color: var(--text-on-primary-color); /* CAMBIO */
+    background-color: #5a6268;
+    color: white;
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
@@ -89,7 +90,7 @@ main h2 {
 }
 
 .product-actions button.delete {
-    background-color: var(--error-color); /* CAMBIO */
+    background-color: #dc3545;
 }
 .product-actions button:hover {
     opacity: 0.8;
@@ -110,21 +111,21 @@ main h2 {
 }
 
 .modal-content {
-    background-color: var(--surface-color); /* CAMBIO */
+    background-color: #fefefe;
     margin: 2% auto;
     padding: 25px;
-    border: 1px solid var(--border-color); /* CAMBIO */
+    border: 1px solid #888;
     width: 90%;
     max-width: 600px;
     border-radius: 8px;
     position: relative;
 }
 .modal-content h2 {
-    color: var(--primary-color); /* CAMBIO */
+    color: #004AAD;
 }
 
 .close-btn {
-    color: var(--text-secondary-color); /* CAMBIO */
+    color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -134,7 +135,7 @@ main h2 {
 }
 
 .close-btn:hover, .close-btn:focus {
-    color: var(--text-primary-color); /* CAMBIO */
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
@@ -146,21 +147,19 @@ main h2 {
 }
 
 #productForm label {
-  color: var(--text-primary-color); /* CAMBIO */
+  color: #333;
   font-weight: bold;
-  grid-column: span 2;
-  margin-bottom: -10px;
+  grid-column: span 2; /* Las etiquetas ocupan todo el ancho */
+  margin-bottom: -10px; /* Reduce el espacio con el input */
 }
 
 #productForm input, #productForm select {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--border-color); /* CAMBIO */
+    border: 1px solid #ccc;
     border-radius: 4px;
     grid-column: span 2;
     box-sizing: border-box;
-    background-color: var(--surface-color); /* CAMBIO */
-    color: var(--text-primary-color); /* CAMBIO */
 }
 
 #productForm .form-actions {
@@ -172,12 +171,12 @@ main h2 {
 }
 
 #productForm button {
-    color: var(--text-on-primary-color); /* CAMBIO */
+    color: white;
     border: none;
     padding: 12px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
 }
-#guardarBtn { background-color: var(--primary-color); } /* CAMBIO */
-#cancelarBtn { background-color: var(--text-secondary-color); } /* CAMBIO */
+#guardarBtn { background-color: #004AAD; }
+#cancelarBtn { background-color: #6c757d; }

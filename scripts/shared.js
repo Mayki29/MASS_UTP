@@ -47,26 +47,6 @@ function cerrarSesion() {
     });
 }
 
-function setActiveNavLink() {
-    // 1. Obtener el nombre del archivo de la URL actual.
-    // window.location.pathname devuelve algo como "/src/pages/main.html"
-    const currentPage = window.location.pathname.split('/').pop(); // Esto extrae "main.html"
-
-    // 2. Obtener todos los enlaces de la barra de navegación.
-    const navLinks = document.querySelectorAll('header nav a');
-
-    // 3. Recorrer cada enlace.
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href');
-
-        // 4. Comprobar si el href del enlace coincide con la página actual.
-        if (linkPage === currentPage) {
-            // 5. Si coincide, añadir la clase 'active'.
-            link.classList.add('active');
-        }
-    });
-}
-
 // Asociar la función de cerrar sesión al botón correspondiente
 document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logoutButton');
@@ -76,5 +56,4 @@ document.addEventListener('DOMContentLoaded', () => {
             cerrarSesion();
         });
     }
-    setActiveNavLink();
 });

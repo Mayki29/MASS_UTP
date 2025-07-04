@@ -1,18 +1,19 @@
-/* styles/ventas.css (versión con variables, boleta por defecto) */
+/* styles/ventas.css */
 
 main {
     display: flex;
     gap: 20px;
     padding: 20px;
-    height: calc(100vh - 140px);
+    /* Quitamos el padding inferior del body para esta página específica si es necesario */
+    height: calc(100vh - 140px); /* Ajusta 140px según la altura de tu header y footer */
 }
 
 /* --- SECCIÓN DE PRODUCTOS (IZQUIERDA) --- */
 .products-section {
-    flex: 1;
+    flex: 1; /* Ocupa la mitad del espacio */
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: auto; /* Scroll si hay muchos productos */
 }
 
 .product-filters {
@@ -21,28 +22,25 @@ main {
     gap: 10px;
     margin-bottom: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #ddd;
 }
 .product-filters input {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid var(--border-color);
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: var(--surface-color);
-    color: var(--text-primary-color);
 }
 .product-filters .category-btn {
     padding: 10px 15px;
-    border: 1px solid var(--primary-color);
-    background-color: var(--surface-color);
-    color: var(--primary-color);
+    border: 1px solid #004AAD;
+    background-color: white;
+    color: #004AAD;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
 }
 .product-filters .category-btn.active {
-    background-color: var(--primary-color);
-    color: var(--text-on-primary-color);
+    background-color: #004AAD;
+    color: white;
 }
 
 .product-grid {
@@ -52,8 +50,7 @@ main {
 }
 
 .product-card {
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
+    border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
     text-align: center;
@@ -72,18 +69,18 @@ main {
 }
 .product-card h3 {
     font-size: 1em;
-    color: var(--primary-color);
+    color: #004AAD;
     margin: 5px 0;
 }
 .product-card .price {
     font-weight: bold;
-    color: var(--text-primary-color);
+    color: #333;
 }
 
 /* --- SECCIÓN DEL CARRITO (DERECHA) --- */
 .cart-section {
-    flex: 1;
-    background-color: var(--surface-color);
+    flex: 1; /* Ocupa la otra mitad */
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 20px;
@@ -99,56 +96,52 @@ main {
 }
 .client-info input {
     padding: 10px;
-    border: 1px solid var(--border-color);
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: var(--surface-color);
-    color: var(--text-primary-color);
 }
 .client-info button {
-    background: var(--primary-color);
+    background: #004AAD;
     border: none;
-    color: var(--text-on-primary-color);
+    color: white;
     padding: 0 15px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .cart-table-container {
-    flex-grow: 1;
-    overflow-y: auto;
+    flex-grow: 1; /* Ocupa el espacio disponible */
+    overflow-y: auto; /* Scroll para la tabla del carrito */
 }
 .cart-table {
     width: 100%;
     border-collapse: collapse;
 }
 .cart-table th, .cart-table td {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #eee;
     padding: 10px;
     text-align: left;
     vertical-align: middle;
 }
 .cart-table th {
-    color: var(--primary-color);
+    color: #004AAD;
 }
 .cart-table .quantity-input {
     width: 50px;
     text-align: center;
-    border: 1px solid var(--border-color);
+    border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
-    background-color: var(--surface-color);
-    color: var(--text-primary-color);
 }
 .cart-table .remove-item-btn {
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--error-color);
+    color: #dc3545;
 }
 
 .cart-summary {
     margin-top: 20px;
-    border-top: 2px solid var(--primary-color);
+    border-top: 2px solid #004AAD;
     padding-top: 15px;
 }
 .summary-row {
@@ -159,7 +152,7 @@ main {
 .summary-row.total {
     font-size: 1.2em;
     font-weight: bold;
-    color: var(--primary-color);
+    color: #004AAD;
 }
 
 .cart-actions {
@@ -177,16 +170,10 @@ main {
     font-weight: bold;
     cursor: pointer;
 }
-#limpiarBtn { 
-    background-color: var(--error-color); 
-    color: var(--text-on-primary-color); 
-}
-#procesarVentaBtn { 
-    background-color: var(--primary-color); 
-    color: var(--text-on-primary-color); 
-}
+#limpiarBtn { background-color: #dc3545; color: white; }
+#procesarVentaBtn { background-color: #004AAD; color: white; }
 
-/* --- ESTILOS DE FEEDBACK Y ESTADOS (SIN CAMBIOS) --- */
+/* Estilo para el feedback visual al añadir al carrito */
 .cart-section.flash {
     animation: flash-animation 0.5s ease-out;
 }
@@ -195,138 +182,24 @@ main {
     50% { background-color: #e8f4ff; } /* Un azul muy claro */
     100% { background-color: white; }
 }
-body.dark-theme {
-    --flash-color: rgba(83, 120, 197, 0.2);
-}
 
+/* Estilo para los mensajes de estado vacío */
 .empty-state-message {
     text-align: center;
     padding: 40px 20px;
-    color: var(--text-secondary-color);
+    color: #888;
     width: 100%;
-    grid-column: 1 / -1;
+    grid-column: 1 / -1; /* Ocupa todo el ancho de la grid */
 }
 
+/* Estilo para botones deshabilitados */
 .cart-actions button:disabled {
-    background-color: var(--text-secondary-color);
-    opacity: 0.5;
+    background-color: #ccc;
     cursor: not-allowed;
-    color: var(--text-on-primary-color);
+    color: #666;
 }
 
+/* Pequeño ajuste para el icono de búsqueda en el botón */
 #search-client-btn {
-    font-size: 1.2em;
-}
-
-.summary-row.discount {
-    color: var(--success-color);
-    font-weight: bold;
-}
-
-/* --- ESTILOS PARA MODAL DE PAGO --- */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.6);
-}
-.modal-content {
-    background-color: var(--surface-color);
-    color: var(--text-primary-color);
-    margin: 10% auto;
-    padding: 25px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    position: relative;
-    border: 1px solid var(--border-color);
-}
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    color: var(--text-secondary-color);
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.payment-summary {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-}
-.payment-summary strong {
-    font-size: 1.5em;
-    color: var(--primary-color);
-}
-#paymentForm {
-    display: grid;
-    gap: 15px;
-}
-#paymentForm label {
-    font-weight: bold;
-}
-#paymentForm select, #paymentForm input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    box-sizing: border-box;
-    background-color: var(--surface-color);
-    color: var(--text-primary-color);
-}
-#confirmPaymentBtn {
-    background-color: var(--success-color);
-    color: var(--text-on-primary-color);
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* --- ESTILOS PARA EL MODAL DE RECIBO (POR DEFECTO, SIN TEMA OSCURO) --- */
-.receipt-content {
-    background-color: #fefefe; /* Fondo blanco fijo */
-    color: #333; /* Texto oscuro fijo */
-    max-width: 450px;
-}
-#receipt-to-print {
-    border: 1px dashed #ccc;
-    padding: 20px;
-    font-family: 'Courier New', Courier, monospace;
-}
-.receipt-header { text-align: center; margin-bottom: 20px; }
-.receipt-header h2 { margin: 5px 0; font-size: 1.2em; color: #004AAD; }
-.receipt-details { margin-bottom: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
-.receipt-details p { margin: 4px 0; font-size: 0.9em; }
-.receipt-table { width: 100%; font-size: 0.9em; }
-.receipt-table th, .receipt-table td { text-align: left; padding: 4px 0; }
-.receipt-table th { border-bottom: 1px solid #333; }
-.receipt-summary { margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px; text-align: right; }
-.receipt-summary p { margin: 4px 0; font-size: 0.9em; }
-.receipt-summary .discount { color: #28a745; }
-.receipt-summary .total { font-weight: bold; font-size: 1.1em; border-top: 1px solid #333; padding-top: 5px; }
-.receipt-footer { text-align: center; margin-top: 20px; font-style: italic; }
-.receipt-actions { margin-top: 20px; text-align: center; }
-.receipt-actions button { background-color: #004AAD; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1em; }
-
-/* --- ESTILOS PARA IMPRESIÓN (SIN CAMBIOS, YA FUNCIONABA) --- */
-.printing-active * { visibility: hidden; }
-.printing-active #receipt-to-print,
-.printing-active #receipt-to-print * { visibility: visible; }
-.printing-active #receipt-to-print {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 20px;
-    border: none;
+    font-size: 1.2em; /* Hace el emoji un poco más grande */
 }

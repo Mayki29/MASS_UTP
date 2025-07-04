@@ -1,4 +1,4 @@
-/* styles/reportes.css (versión con variables CSS) */
+/* styles/reportes.css */
 
 main {
     padding: 20px;
@@ -12,7 +12,7 @@ main {
 }
 
 .report-header h2 {
-    color: var(--text-primary-color); /* CAMBIO */
+    color: #333;
     margin: 0;
 }
 
@@ -24,25 +24,23 @@ main {
 
 .report-header select {
     padding: 8px;
-    border: 1px solid var(--border-color); /* CAMBIO */
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: var(--surface-color); /* CAMBIO */
-    color: var(--text-primary-color); /* CAMBIO */
 }
 
 /* --- GRID PRINCIPAL DEL DASHBOARD --- */
 .dashboard-grid {
     display: grid;
+    /* Define columnas flexibles que se ajustan al contenido */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
 .card {
-    background-color: var(--surface-color); /* CAMBIO */
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--border-color); /* CAMBIO: Añadido para visibilidad en tema oscuro */
 }
 
 /* --- TARJETAS DE ESTADÍSTICAS (KPIs) --- */
@@ -53,7 +51,7 @@ main {
 }
 
 .stat-card .icon {
-    background-color: rgba(0, 74, 173, 0.1); /* Este puede quedarse, es un color de acento sutil */
+    background-color: rgba(0, 74, 173, 0.1);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -65,18 +63,18 @@ main {
 .stat-card .icon svg {
     width: 24px;
     height: 24px;
-    fill: var(--primary-color); /* CAMBIO */
+    fill: #004AAD;
 }
 
 .stat-info .title {
     font-size: 14px;
-    color: var(--text-secondary-color); /* CAMBIO */
+    color: #666;
 }
 
 .stat-info .value {
     font-size: 24px;
     font-weight: 700;
-    color: var(--text-primary-color); /* CAMBIO */
+    color: #333;
     margin: 2px 0;
 }
 
@@ -85,19 +83,20 @@ main {
     font-weight: 600;
 }
 
-.trend-up { color: var(--success-color); } /* CAMBIO */
-.trend-down { color: var(--error-color); } /* CAMBIO */
-.trend-neutral { color: var(--text-secondary-color); } /* CAMBIO */
+.trend-up { color: #28a745; }
+.trend-down { color: #dc3545; }
+.trend-neutral { color: #6c757d; }
 
 /* --- CONTENEDORES DE GRÁFICOS Y TABLA --- */
 .chart-container, .table-container {
+    /* Ocupa 2 columnas en la grid si hay espacio */
     grid-column: span 2;
 }
 
 .card h3 {
     margin-top: 0;
-    color: var(--primary-color); /* CAMBIO */
-    border-bottom: 1px solid var(--border-color); /* CAMBIO */
+    color: #004AAD;
+    border-bottom: 1px solid #eee;
     padding-bottom: 10px;
 }
 
@@ -111,17 +110,16 @@ main {
 .products-table th, .products-table td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid var(--border-color); /* CAMBIO */
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .products-table th {
     font-size: 14px;
-    color: var(--text-secondary-color); /* CAMBIO */
+    color: #666;
 }
 
 .products-table td {
     font-size: 15px;
-    /* Hereda el color del body */
 }
 
 .trend-icon svg {
@@ -129,24 +127,27 @@ main {
     height: 16px;
     vertical-align: middle;
 }
-.trend-icon.up svg { fill: var(--success-color); } /* CAMBIO */
-.trend-icon.down svg { fill: var(--error-color); } /* CAMBIO */
+.trend-icon.up svg { fill: #28a745; }
+.trend-icon.down svg { fill: #dc3545; }
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
     .chart-container, .table-container {
-        grid-column: span 1;
+        grid-column: span 1; /* En pantallas medianas, ocupan 1 columna */
     }
 }
 
-/* --- CONTENEDOR DE GRÁFICOS (Wrapper) --- */
 .chart-container {
+    /* Hacemos que el contenedor de la tarjeta sea un flex container en columna */
     display: flex;
     flex-direction: column;
 }
+
 .chart-wrapper {
-    position: relative;
-    height: 320px;
-    width: 100%;
-    flex-grow: 1;
+    position: relative; /* Contexto para el canvas */
+    height: 320px;     /* ¡Esta es la clave de la solución! Le damos una altura fija. */
+    width: 100%;       /* Ocupa todo el ancho de la tarjeta */
+    flex-grow: 1;      /* Permite que ocupe el espacio vertical disponible en la tarjeta */
 }
+
+/* El canvas se ajustará automáticamente a su wrapper gracias a las opciones de Chart.js */

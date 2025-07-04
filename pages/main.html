@@ -1,40 +1,22 @@
 <!-- pages/main.html -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestión MASS - Inicio</title>
+
+    <!-- Ruta al archivo de estilos CSS -->
     <link rel="icon" type="image/png" href="../assets/favicon.png">
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- Librería SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <script>
-        // Script para aplicar el tema guardado inmediatamente
-        (function() {
-            // 1. Obtener el objeto completo de configuración
-            const settingsString = localStorage.getItem('appSettings');
-            if (settingsString) {
-                // 2. Convertirlo a un objeto JavaScript
-                const settings = JSON.parse(settingsString);
-                // 3. Si existe una preferencia de tema y es 'oscuro', aplicar la clase
-                if (settings && settings.temaVisual === 'oscuro') {
-                    document.body.classList.add('dark-theme');
-                }
-            }
-        })();
-    </script>
-    <script>
-        // Script para aplicar el tema guardado inmediatamente y evitar el flash
-        (function() {
-            const temaGuardado = localStorage.getItem('appTheme');
-            if (temaGuardado === 'dark') {
-                document.body.classList.add('dark-theme');
-            }
-        })();
-    </script>
+
     <header>
         <div class="logo">
             <!-- Ruta a la imagen en la carpeta de assets -->
@@ -49,7 +31,6 @@
                 <li><a href="inventario.html">Inventario</a></li>
                 <li><a href="ventas.html">Ventas</a></li>
                 <li><a href="reportes.html">Reportes</a></li>
-                <li><a href="historial_ventas.html">Historial</a></li>
             </ul>
         </nav>
         <div class="user-dropdown">

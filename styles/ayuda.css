@@ -1,22 +1,21 @@
-/* styles/ayuda.css (versión con variables CSS) */
+/* styles/ayuda.css */
 
 main {
     padding: 20px;
-    /* El fondo ya es controlado por 'common.css' */
 }
 
 .container {
     max-width: 800px;
     margin: 20px auto;
     padding: 25px 30px;
-    background-color: var(--surface-color); /* CAMBIO */
+    background-color: #fff;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
     border-radius: 8px;
 }
 
 .container h1 {
-    color: var(--primary-color); /* CAMBIO */
-    border-bottom: 2px solid var(--secondary-color); /* CAMBIO */
+    color: #004AAD;
+    border-bottom: 2px solid #FFC300;
     padding-bottom: 10px;
     margin-top: 0;
 }
@@ -26,16 +25,16 @@ main {
 }
 
 .help-section h2 {
-    color: var(--text-primary-color); /* CAMBIO */
+    color: #333;
     font-size: 1.3em;
     margin-bottom: 15px;
-    border-left: 4px solid var(--primary-color); /* CAMBIO */
+    border-left: 4px solid #004AAD;
     padding-left: 10px;
 }
 
 /* Estilos para el acordeón de FAQ */
 .faq-item {
-    border-bottom: 1px solid var(--border-color); /* CAMBIO */
+    border-bottom: 1px solid #eee;
 }
 
 .faq-question {
@@ -51,11 +50,10 @@ main {
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.2s;
-    color: var(--text-primary-color); /* CAMBIO: Añadido color de texto */
 }
 
 .faq-question:hover {
-    background-color: rgba(0,0,0,0.05); /* CAMBIO: Un hover sutil que funciona en ambos temas */
+    background-color: #f8f9fa;
 }
 
 .faq-answer {
@@ -63,8 +61,7 @@ main {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-    background-color: rgba(0,0,0,0.03); /* CAMBIO: Un fondo muy sutil */
-    color: var(--text-secondary-color); /* CAMBIO */
+    background-color: #f8f9fa;
 }
 
 .faq-answer p {
@@ -94,15 +91,13 @@ main {
 .contact-form textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--border-color); /* CAMBIO */
+    border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: var(--surface-color); /* CAMBIO */
-    color: var(--text-primary-color); /* CAMBIO */
 }
 .contact-form button {
-    background-color: var(--primary-color); /* CAMBIO */
-    color: var(--text-on-primary-color); /* CAMBIO */
+    background-color: #004AAD;
+    color: white;
     border: none;
     padding: 12px 25px;
     border-radius: 5px;
