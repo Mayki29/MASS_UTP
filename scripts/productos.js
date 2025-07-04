@@ -1,10 +1,7 @@
 /* scripts/productos.js */
 /* Lógica para la página de gestión de productos */
-const supabaseUrl = 'https://wgivejkvpksrcwmgclrp.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndnaXZlamt2cGtzcmN3bWdjbHJwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0MjEyMjcsImV4cCI6MjA2Njk5NzIyN30.mzyEwKXTbFpwyQdrR8w-Wdwx8A4-hnmxUUeNjCCOUtk';
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Primero, verificar si el usuario tiene una sesión activa
     checkUserSession();
 
@@ -17,30 +14,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const modalTitulo = document.getElementById('modalTitulo');
     const productIdInput = document.getElementById('productId'); // Input oculto para el ID
 
+    // Base de datos local (array de productos)
+    let productos = JSON.parse(localStorage.getItem('productos')) || [
+        // Datos de ejemplo si no hay nada en localStorage
+        { id: 1, nombre: "Arroz Extra Bells 5kg", precio: "15.90", stock: 150, imagen: "../assets/Arroz_extra_bells.webp" },
+        { id: 2, nombre: "Aceite Vegetal Bells 1L", precio: "12.50", stock: 40, imagen: "../assets/Aceite_Vegetal_bells.webp" }
+    ];
+    let nextId = productos.length > 0 ? Math.max(...productos.map(p => p.id)) + 1 : 1;
 
     // --- FUNCIONES ---
 
     /** Renderiza la lista de productos en el DOM */
-    const renderProductos = async () => {
-        const { data, error } = await supabase
-            .from('productos')
-            .select(`
-        *,
-        categorias (
-          nombre,
-          descripcion
-        )
-      `);
-
-        if (error) {
-            console.error('Error al obtener productos con categorías:', error.message);
-        } else {
-            console.log('Productos con categorías:', data);
-        }
-
-        // Base de datos local (array de productos)
-        let productos = data
-
+    const renderProductos = () => {
         productList.innerHTML = ''; // Limpiar la lista
         if (productos.length === 0) {
             productList.innerHTML = '<p>No hay productos para mostrar. ¡Agrega uno nuevo!</p>';
@@ -70,28 +55,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     /** Abre el modal, reseteando el formulario para un nuevo producto */
-    const openNewModal = async () => {
+    const openNewModal = () => {
         modalTitulo.textContent = "Nuevo Producto";
         productForm.reset();
         productIdInput.value = ''; // Asegura que no estemos en modo edición
         productModal.style.display = "block";
-        const { data, error } = await supabase
-            .from('categorias')
-            .select('*')
-            .order('nombre', { ascending: true }); // opcional: ordenar alfabéticamente
-
-        if (error) {
-            console.error('Error al cargar categorías:', error.message);
-            return;
-        }
-
-        const select = document.getElementById('categoria');
-        data.forEach(categoria => {
-            const option = document.createElement('option');
-            option.value = categoria.id;
-            option.textContent = categoria.nombre;
-            select.appendChild(option);
-        });
     };
 
 
@@ -99,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const openEditModal = (id) => {
         const producto = productos.find(p => p.id === id);
         if (!producto) return;
-
+        
         modalTitulo.textContent = "Editar Producto";
         productIdInput.value = producto.id;
         document.getElementById('nombre').value = producto.nombre;
@@ -108,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('categoria').value = producto.categoria || '';
         document.getElementById('fecha').value = producto.fecha || '';
         // Aquí podrías manejar la imagen si tuvieras un input file
-
+        
         productModal.style.display = "block";
     };
 
@@ -116,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const closeModal = () => {
         productModal.style.display = "none";
     };
-
+    
     // --- EVENT LISTENERS ---
 
     // Abrir modal para nuevo producto
@@ -132,61 +100,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('cancelarBtn').addEventListener('click', closeModal);
 
     // Manejar el envío del formulario (Crear o Actualizar)
-    productForm.addEventListener('submit', async (event) => {
+    productForm.addEventListener('submit', (event) => {
         event.preventDefault();
-
-
+        
         const id = parseInt(productIdInput.value);
         const productoData = {
             nombre: document.getElementById('nombre').value,
             precio: document.getElementById('precio').value,
             stock: parseInt(document.getElementById('stock').value),
-            stock_minimo: parseInt(document.getElementById('stockMinimo').value),
             fecha: document.getElementById('fecha').value,
             categoria: document.getElementById('categoria').value,
             imagen: '../assets/placeholder.png' // Imagen por defecto
         };
-        //Obtenemos imagen
-        const archivo = document.getElementById('imagen').files[0];
-        if (!archivo) return alert('Selecciona una imagen');
-
-        //Le damos un nombre unico al archivo
-        const nombreArchivo = `${Date.now()}_${archivo.name}`;
-
-        //Guardamos la imagen
-        const { data: uploadData, error: uploadError } = await supabase.storage
-            .from('productos') // nombre del bucket
-            .upload(nombreArchivo, archivo);
-
-        if (uploadError) {
-            console.error('Error al subir imagen:', uploadError.message);
-            return alert('Error al subir imagen');
-        }
-
-        // Obtener URL pública
-        const { data: publicUrlData } = supabase.storage
-            .from('productos')
-            .getPublicUrl(nombreArchivo);
-        productoData.imagen = publicUrlData.publicUrl;
-
 
         if (id) { // Si hay un ID, estamos actualizando
             const index = productos.findIndex(p => p.id === id);
             productos[index] = { ...productos[index], ...productoData };
             Swal.fire('¡Actualizado!', 'El producto ha sido modificado.', 'success');
         } else { // Si no, estamos creando
-            const { error: insertError } = await supabase
-                .from('productos')
-                .insert({
-                    nombre: productoData.nombre,
-                    precio: productoData.precio,
-                    imagen: productoData.imagen,
-                    categoria_id: productoData.categoria,
-                    stock: productoData.stock,
-                    stock_minimo: productoData.stock_minimo,
-                    fecha_caducidad: productoData.fecha,
-                    estado: 'activo',
-                });
+            productoData.id = nextId++;
+            productos.push(productoData);
             Swal.fire('¡Guardado!', 'El nuevo producto ha sido agregado.', 'success');
         }
 
@@ -195,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Manejar clics en los botones de "Editar" y "Eliminar" (Event Delegation)
-    productList.addEventListener('click', async(event) => {
+    productList.addEventListener('click', (event) => {
         const target = event.target;
         const id = parseInt(target.dataset.id);
 
@@ -213,19 +146,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Sí, ¡eliminar!',
                 cancelButtonText: 'Cancelar'
-            }).then(async (result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    const { error } = await supabase
-                        .from('productos')
-                        .delete()
-                        .eq('id', id);
-
-                    if (error) {
-                        console.error('Error al eliminar producto:', error.message);
-                        Swal.fire('Error!', 'No se pudo eliminar el producto', 'error');
-                    } else {
-                        Swal.fire('¡Eliminado!', 'El producto ha sido eliminado.', 'success');
-                    }
+                    productos = productos.filter(p => p.id !== id);
                     renderProductos();
                     Swal.fire('¡Eliminado!', 'El producto ha sido eliminado.', 'success');
                 }

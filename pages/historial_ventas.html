@@ -1,13 +1,13 @@
-<!-- pages/main.html -->
+<!-- pages/historial_ventas.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestión MASS - Inicio</title>
+    <title>Historial de Ventas - MASS</title>
     <link rel="icon" type="image/png" href="../assets/favicon.png">
     <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/historial_ventas.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -26,15 +26,6 @@
             }
         })();
     </script>
-    <script>
-        // Script para aplicar el tema guardado inmediatamente y evitar el flash
-        (function() {
-            const temaGuardado = localStorage.getItem('appTheme');
-            if (temaGuardado === 'dark') {
-                document.body.classList.add('dark-theme');
-            }
-        })();
-    </script>
     <header>
         <div class="logo">
             <!-- Ruta a la imagen en la carpeta de assets -->
@@ -43,7 +34,6 @@
         </div>
         <nav>
             <ul>
-                <!-- Los enlaces a otras páginas asumen que también estarán en la carpeta /pages -->
                 <li><a href="main.html">Inicio</a></li>
                 <li><a href="productos.html">Productos</a></li>
                 <li><a href="inventario.html">Inventario</a></li>
@@ -55,7 +45,6 @@
         <div class="user-dropdown">
             <div class="user-info">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                <!-- Este span será actualizado por JavaScript -->
                 <span id="userInfo">Admin</span>
             </div>
             <div class="user-dropdown-content">
@@ -69,34 +58,38 @@
     </header>
 
     <main>
-        <div class="welcome">
-            <h1>¡Bienvenido al Sistema de Gestión Mass!</h1>
-            <p>Los mejores precios, cerca de ti.</p>
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <h3>Ventas del Día</h3>
-                <div class="value">S/ 2,500</div>
-            </div>
-            <div class="card">
-                <h3>Productos en Stock</h3>
-                <div class="value">1,234</div>
-            </div>
-            <div class="card">
-                <h3>Alertas de Inventario</h3>
-                <div class="value">5</div>
+        <div class="container">
+            <h1>Historial de Ventas</h1>
+            <div class="table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Nro. Venta</th>
+                            <th>Fecha</th>
+                            <th>Cliente (DNI)</th>
+                            <th>N° Items</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body">
+                        <!-- Las filas del historial se insertarán aquí -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <div id="receipt-container">
+                <!-- El contenido del recibo se generará aquí con JS -->
+            </div>
+        </div>
+    </div>
+    <footer>© 2025 Mass - Todos los derechos reservados</footer>
 
-    <footer>
-        © 2025 Mass - Todos los derechos reservados
-    </footer>
-
-    <!-- Ruta al archivo JavaScript -->
     <script src="../scripts/shared.js"></script>
-    <script src="../scripts/main.js"></script>
-    
+    <script src="../scripts/historial_ventas.js"></script>
 </body>
 </html>

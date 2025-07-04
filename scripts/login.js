@@ -1,7 +1,4 @@
 /* scripts/login.js */
-const supabaseUrl = 'https://wgivejkvpksrcwmgclrp.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndnaXZlamt2cGtzcmN3bWdjbHJwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0MjEyMjcsImV4cCI6MjA2Njk5NzIyN30.mzyEwKXTbFpwyQdrR8w-Wdwx8A4-hnmxUUeNjCCOUtk';
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('contraseña');
@@ -16,28 +13,17 @@ function togglePasswordVisibility() {
     }
 }
 // ... (el resto del código JS es exactamente el mismo que antes) ... */
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
-        loginForm.addEventListener('submit', async function(event) {
+        loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const usuario = document.getElementById('usuario').value;
             const contrasena = document.getElementById('contraseña').value;
             const tienda = document.getElementById('tienda').value;
 
-              const { data, error } = await supabase.auth.signInWithPassword({
-                email: usuario,
-                password: contrasena,
-            });
-
-            console.log("La data es: ", data)
-            console.log("El error es: ", error)
-
-            
-
-            if (data.user != null && tienda !== '') {
+            if (usuario === 'admin' && contrasena === 'password' && tienda !== '') {
                 localStorage.setItem('usuario', usuario);
-                localStorage.setItem('data', data);
                 localStorage.setItem('tienda', tienda);
                 Swal.fire({
                     icon: 'success',

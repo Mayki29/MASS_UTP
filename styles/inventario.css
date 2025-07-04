@@ -1,4 +1,4 @@
-/* styles/inventario.css */
+/* styles/inventario.css (versión con variables CSS) */
 
 main {
     padding: 20px;
@@ -7,8 +7,8 @@ main {
 }
 
 main h2 {
-    color: #004AAD;
-    border-bottom: 2px solid #FFC300;
+    color: var(--primary-color); /* CAMBIO */
+    border-bottom: 2px solid var(--secondary-color); /* CAMBIO */
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
@@ -25,13 +25,15 @@ main h2 {
 .filters-actions input[type="text"],
 .filters-actions select {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color); /* CAMBIO */
     border-radius: 5px;
+    background-color: var(--surface-color); /* CAMBIO */
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 .filters-actions button {
-    background-color: #004AAD;
-    color: white;
+    background-color: var(--primary-color); /* CAMBIO */
+    color: var(--text-on-primary-color); /* CAMBIO */
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -39,38 +41,46 @@ main h2 {
     transition: background-color 0.3s;
 }
 .filters-actions button:hover {
-    background-color: #003478;
+    background-color: var(--primary-color-dark); /* CAMBIO */
 }
 
 /* --- TABLA DE INVENTARIO --- */
 .inventory-table-container {
-    overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+    overflow-x: auto;
+    background-color: var(--surface-color); /* CAMBIO */
+    border: 1px solid var(--border-color); /* CAMBIO */
+    border-radius: 8px; /* CAMBIO */
 }
 
 .inventory-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     font-size: 14px;
 }
 .inventory-table th,
 .inventory-table td {
-    border: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color); /* CAMBIO: Borde solo inferior para un look más limpio */
     padding: 12px;
     text-align: left;
 }
+.inventory-table td {
+    border-left: 1px solid var(--border-color); /* CAMBIO: Borde vertical sutil */
+}
+.inventory-table td:first-child {
+    border-left: none;
+}
 
 .inventory-table th {
-    background-color: #e9ecef;
-    color: #004AAD;
+    background-color: rgba(0,0,0,0.03); /* CAMBIO: Fondo muy sutil para ambos temas */
+    color: var(--primary-color);
     font-weight: 600;
 }
 
 .inventory-table tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: rgba(0,0,0,0.02); /* CAMBIO: Fondo de fila alterna muy sutil */
 }
 .inventory-table tr:hover {
-    background-color: #f1f1f1;
+    background-color: rgba(0,0,0,0.05); /* CAMBIO: Hover sutil */
 }
 
 .actions-cell {
@@ -83,7 +93,7 @@ main h2 {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    fill: #004AAD;
+    fill: var(--primary-color); /* CAMBIO */
     transition: transform 0.2s;
 }
 .actions-cell svg:hover {
@@ -93,14 +103,14 @@ main h2 {
 .status-badge {
     padding: 5px 10px;
     border-radius: 12px;
-    color: white;
+    color: var(--text-on-primary-color); /* CAMBIO */
     font-weight: bold;
     font-size: 12px;
     text-align: center;
 }
-.status-normal { background-color: #28a745; } /* Verde */
-.status-bajo { background-color: #ffc107; color: #333; } /* Amarillo */
-.status-critico { background-color: #dc3545; } /* Rojo */
+.status-normal { background-color: var(--success-color); } /* CAMBIO */
+.status-bajo { background-color: #ffc107; color: var(--text-primary-color); } /* Dejamos amarillo con texto oscuro */
+.status-critico { background-color: var(--error-color); } /* CAMBIO */
 
 /* --- PAGINACIÓN --- */
 .pagination {
@@ -109,8 +119,8 @@ main h2 {
     margin-top: 20px;
 }
 .pagination button {
-    background-color: #004AAD;
-    color: white;
+    background-color: var(--primary-color); /* CAMBIO */
+    color: var(--text-on-primary-color); /* CAMBIO */
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
@@ -118,7 +128,8 @@ main h2 {
     margin: 0 5px;
 }
 .pagination button:disabled {
-    background-color: #ccc;
+    background-color: var(--text-secondary-color); /* CAMBIO */
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
@@ -132,15 +143,15 @@ main h2 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6); /* Un poco más oscuro */
     padding-top: 60px;
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--surface-color); /* CAMBIO */
     margin: 2% auto;
     padding: 25px;
-    border: 1px solid #888;
+    border: 1px solid var(--border-color); /* CAMBIO */
     width: 90%;
     max-width: 500px;
     border-radius: 8px;
@@ -148,19 +159,19 @@ main h2 {
 }
 
 .modal-content h2 {
-    color: #004AAD;
+    color: var(--primary-color); /* CAMBIO */
     margin-top: 0;
 }
 
 .modal-content .close-btn {
-    color: #aaa;
+    color: var(--text-secondary-color); /* CAMBIO */
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }
 .modal-content .close-btn:hover {
-    color: black;
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 .modal-content form {
@@ -170,19 +181,22 @@ main h2 {
 
 .modal-content label {
     font-weight: bold;
-    color: #333;
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 .modal-content input, .modal-content select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color); /* CAMBIO */
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: var(--surface-color); /* CAMBIO */
+    color: var(--text-primary-color); /* CAMBIO */
 }
 
 .modal-content input[readonly] {
-    background-color: #e9ecef;
+    background-color: rgba(0,0,0,0.1); /* CAMBIO: Fondo sutil para readonly */
+    opacity: 0.7;
 }
 
 .modal-content .form-actions {
@@ -193,12 +207,12 @@ main h2 {
 }
 
 .modal-content button {
-    color: white;
+    color: var(--text-on-primary-color); /* CAMBIO */
     border: none;
     padding: 12px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
 }
-.modal-content .btn-primary { background-color: #004AAD; }
-.modal-content .btn-secondary { background-color: #6c757d; }
+.modal-content .btn-primary { background-color: var(--primary-color); } /* CAMBIO */
+.modal-content .btn-secondary { background-color: var(--text-secondary-color); } /* CAMBIO */
