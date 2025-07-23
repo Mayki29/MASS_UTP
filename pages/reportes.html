@@ -64,80 +64,84 @@
             <h2>Reportes y Estadísticas</h2>
             <div class="period-filter">
                 <label for="periodo">Periodo:</label>
-                <select id="periodo"><option>Hoy</option><option>Esta Semana</option><option>Este Mes</option></select>
+                <select id="periodo">
+                    <option value="all">Todo el Historial</option>
+                    <option value="today">Hoy</option>
+                    <option value="this_week">Esta Semana</option>
+                    <option value="this_month">Este Mes</option>
+                </select>
+                <!-- ¡NUEVO! Botón de Exportar -->
+                <button id="exportarReporteBtn">Exportar Excel</button>
             </div>
         </div>
 
-        <div class="dashboard-grid">
-            <!-- Tarjeta 1: Ventas Totales -->
-            <div class="card stat-card">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.08c-2.03 0-4.42-1.2-4.42-3.58V12h1.5v.5c0 1.51 1.91 2.58 2.92 2.58s2.92-1.07 2.92-2.58V12h1.5v.5c0 2.38-2.39 3.58-4.42 3.58zM12 11c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2s2 .9 2 2v2c0 1.1-.9 2-2 2z"/></svg></div>
-                <div class="stat-info">
-                    <div class="title">Ventas Totales</div>
-                    <div class="value">S/. 15,890.00</div>
-                    <div class="trend trend-up">+12.5%</div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 2: Total Pedidos -->
-            <div class="card stat-card">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
-                <div class="stat-info">
-                    <div class="title">Total Pedidos</div>
-                    <div class="value">234</div>
-                    <div class="trend trend-up">+8.3%</div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3: Productos Top -->
-            <div class="card stat-card">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="stat-info">
-                    <div class="title">Productos Top</div>
-                    <div class="value">45</div>
-                    <div class="trend trend-down">-2.1%</div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 4: Stock Bajo -->
-            <div class="card stat-card">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></div>
-                <div class="stat-info">
-                    <div class="title">Stock Bajo</div>
-                    <div class="value">12</div>
-                    <div class="trend trend-neutral">--%</div>
-                </div>
-            </div>
-
-            <!-- Gráfico 1: Ventas por Categoría -->
-            <div class="card chart-container">
-                <h3>Ventas por Categoría</h3>
-                <div class="chart-wrapper">
-                    <canvas id="ventasCategoriaChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Gráfico 2: Tendencia de Ventas -->
-            <div class="card chart-container">
-                <h3>Tendencia de Ventas</h3>
-                <div class="chart-wrapper">
-                    <canvas id="tendenciaVentasChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Tabla: Productos Más Vendidos -->
-            <div class="card table-container">
-                <h3>Productos Más Vendidos</h3>
-                <table class="products-table">
-                    <thead><tr><th>Producto</th><th>Categoría</th><th>Unidades</th><th>Ingresos</th><th>Tendencia</th></tr></thead>
-                    <tbody>
-                        <tr><td>Arroz Familiar</td><td>Abarrotes</td><td>530</td><td>S/. 8,268.00</td><td class="trend-icon up"><svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></td></tr>
-                        <tr><td>Aceite Vegetal</td><td>Abarrotes</td><td>342</td><td>S/. 4,275.00</td><td class="trend-icon down"><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></td></tr>
-                        <!-- Más filas aquí -->
-                    </tbody>
-                </table>
-            </div>
+        <!-- En pages/reportes.html -->
+<div class="dashboard-grid">
+    <!-- Tarjeta 1: Ventas Totales -->
+    <div class="card stat-card">
+        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.08c-2.03 0-4.42-1.2-4.42-3.58V12h1.5v.5c0 1.51 1.91 2.58 2.92 2.58s2.92-1.07 2.92-2.58V12h1.5v.5c0 2.38-2.39 3.58-4.42 3.58zM12 11c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2s2 .9 2 2v2c0 1.1-.9 2-2 2z"/></svg></div>
+        <div class="stat-info">
+            <div class="title">Ingresos Totales</div>
+            <div class="value" id="kpi-ingresos-totales">S/ 0.00</div>
+            <!-- El trend lo dejaremos estático por ahora para simplificar -->
+            <div class="trend trend-neutral">--%</div>
         </div>
+    </div>
+
+    <!-- Tarjeta 2: Total Pedidos (Ventas) -->
+    <div class="card stat-card">
+        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+        <div class="stat-info">
+            <div class="title">N° de Ventas</div>
+            <div class="value" id="kpi-nro-ventas">0</div>
+            <div class="trend trend-neutral">--%</div>
+        </div>
+    </div>
+    
+    <!-- ¡NUEVA TARJETA! Ticket Promedio -->
+    <div class="card stat-card">
+        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></div>
+        <div class="stat-info">
+            <div class="title">Ticket Promedio</div>
+            <div class="value" id="kpi-ticket-promedio">S/ 0.00</div>
+            <div class="trend trend-neutral">--%</div>
+        </div>
+    </div>
+
+    <!-- Tarjeta 4: Stock Bajo -->
+    <div class="card stat-card">
+        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></div>
+        <div class="stat-info">
+            <div class="title">Productos con Stock Bajo</div>
+            <div class="value" id="kpi-stock-bajo">0</div>
+            <div class="trend trend-neutral">--%</div>
+        </div>
+    </div>
+
+    <!-- Gráfico 1: Ventas por Categoría -->
+    <div class="card chart-container">
+        <h3>Ingresos por Categoría</h3>
+        <div class="chart-wrapper"><canvas id="ventasCategoriaChart"></canvas></div>
+    </div>
+
+    <!-- Gráfico 2: Tendencia de Ventas -->
+    <div class="card chart-container">
+        <h3>Ventas de los Últimos 7 Días</h3>
+        <div class="chart-wrapper"><canvas id="tendenciaVentasChart"></canvas></div>
+    </div>
+
+    <!-- Tabla: Productos Más Vendidos -->
+    <div class="card table-container">
+        <h3>Top 5 Productos Más Vendidos (por unidades)</h3>
+        <table class="products-table">
+            <thead><tr><th>Producto</th><th>Categoría</th><th>Unidades Vendidas</th></tr></thead>
+            <!-- Añadimos ID al body de la tabla -->
+            <tbody id="top-products-table-body">
+                <!-- Las filas se generarán aquí -->
+            </tbody>
+        </table>
+    </div>
+</div>
     </main>
     
     <footer>© 2025 Mass - Todos los derechos reservados</footer>

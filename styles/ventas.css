@@ -188,12 +188,12 @@ main {
 
 /* --- ESTILOS DE FEEDBACK Y ESTADOS (SIN CAMBIOS) --- */
 .cart-section.flash {
-    animation: flash-animation 0.5s ease-out;
+    animation: flash-animation 0.6s ease-out;
 }
 @keyframes flash-animation {
-    0% { background-color: white; }
-    50% { background-color: #e8f4ff; } /* Un azul muy claro */
-    100% { background-color: white; }
+    50% {
+        background-color: var(--flash-color);
+    }
 }
 body.dark-theme {
     --flash-color: rgba(83, 120, 197, 0.2);

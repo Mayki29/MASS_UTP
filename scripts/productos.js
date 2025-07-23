@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const select = document.getElementById('categoria');
+        select.innerHTML='';
         data.forEach(categoria => {
             const option = document.createElement('option');
             option.value = categoria.id;

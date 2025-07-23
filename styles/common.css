@@ -18,6 +18,7 @@
 
     --success-color: #28a745;
     --error-color: #dc3545;
+    --flash-color: #e8f4ff;
 }
 
 /* --- DEFINICIÓN DEL TEMA OSCURO --- */
@@ -37,6 +38,7 @@ body.dark-theme {
     --secondary-color: #FFC300;
     --text-on-primary-color: #ffffff;
     --text-on-secondary-color: #333333;
+    --flash-color: rgba(83, 120, 197, 0.4);
 }
 
 /* --- ESTILOS GENERALES --- */

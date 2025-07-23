@@ -78,8 +78,15 @@ h1 { /* Esta h1 está dentro del .container, no necesita color de texto explíci
 /* --- Estilos del Recibo dentro del Modal --- */
 /* MANTENEMOS ESTOS COLORES FIJOS para consistencia con la boleta de impresión */
 #receipt-container {
+    /* ¡NUEVOS ESTILOS! */
+    background-color: #ffffff; /* Forzamos un fondo blanco, como una hoja de papel */
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    
+    /* MANTENEMOS ESTOS COLORES FIJOS para consistencia con la boleta de impresión */
     font-family: 'Courier New', Courier, monospace; 
-    color: #333; /* Color de texto fijo para el recibo */
+    color: #333; 
 }
 #receipt-container .receipt-header { text-align: center; margin-bottom: 20px; }
 #receipt-container .receipt-header img { width: 50px; }
@@ -91,3 +98,52 @@ h1 { /* Esta h1 está dentro del .container, no necesita color de texto explíci
 #receipt-container .receipt-table th, #receipt-container .receipt-table td { text-align: left; padding: 4px 0; }
 #receipt-container .receipt-table th { border-bottom: 1px solid #333; }
 #receipt-container .receipt-summary .total { font-weight: bold; font-size: 1.1em; border-top: 1px solid #333; }
+/* ¡NUEVO! Estilos para los filtros */
+.filters-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.filters-container input[type="text"],
+.filters-container select {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--surface-color);
+    color: var(--text-primary-color);
+}
+.filters-container input[type="text"] {
+    flex-grow: 1; /* El buscador ocupa el espacio restante */
+}
+/* ¡NUEVO! Estilos para la paginación */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+}
+.pagination-container button {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary-color);
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.pagination-container button:hover {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary-color);
+    border-color: var(--primary-color);
+}
+.pagination-container button.active {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary-color);
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+.pagination-container button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

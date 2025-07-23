@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/inventario.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
     <script>
@@ -61,9 +62,18 @@
     <main>
         <h2>Control de Inventario</h2>
         <div class="filters-actions">
-            <input type="text" id="buscarProducto" placeholder="Buscar por nombre o código...">
-            <select id="categoriaFilter"><option value="">Todas las Categorías</option></select>
-            <select id="estadoStockFilter"><option value="">Todos los Estados</option></select>
+            <!-- AÑADIR/VERIFICAR IDs -->
+            <input type="text" id="buscarProductoInput" placeholder="Buscar por nombre o código...">
+            <select id="categoriaFilter">
+                <option value="">Todas las Categorías</option>
+                <!-- Las categorías se podrían poblar dinámicamente -->
+            </select>
+            <select id="estadoStockFilter">
+                <option value="">Todos los Estados</option>
+                <option value="normal">Normal</option>
+                <option value="bajo">Bajo</option>
+                <option value="critico">Crítico</option>
+            </select>
             <button id="ajustarStockBtn">Ajustar Stock</button>
             <button id="exportarExcelBtn">Exportar a Excel</button>
         </div>
@@ -92,22 +102,30 @@
         </div>
     </main>
     
-    <!-- Modals -->
+    <!-- Modal para Ajustar Stock -->
     <div id="ajustarStockModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">×</span>
             <h2>Ajuste de Stock</h2>
             <form id="ajusteStockForm">
-                <label for="ajusteProducto">Producto</label>
-                <select id="ajusteProducto" name="producto" required></select>
+                <label for="ajusteProductoSelect">Producto</label>
+                <!-- Este select será llenado por JS -->
+                <select id="ajusteProductoSelect" required></select>
+
                 <label for="tipoAjuste">Tipo de Ajuste</label>
-                <select id="tipoAjuste" name="tipoAjuste"><option value="entrada">Entrada</option><option value="salida">Salida</option></select>
-                <label for="cantidad">Cantidad</label>
-                <input type="number" id="cantidad" name="cantidad" required min="1">
-                <label for="motivo">Motivo</label>
-                <input type="text" id="motivo" name="motivo" placeholder="Ej: Merma, Conteo físico, etc.">
+                <select id="tipoAjuste">
+                    <option value="entrada">Entrada de Stock</option>
+                    <option value="salida">Salida de Stock (Merma, Retiro, etc.)</option>
+                </select>
+                
+                <label for="cantidadAjuste">Cantidad</label>
+                <input type="number" id="cantidadAjuste" required min="1">
+                
+                <label for="motivoAjuste">Motivo</label>
+                <input type="text" id="motivoAjuste" placeholder="Ej: Conteo físico, producto dañado...">
+                
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary">Cancelar</button>
+                    <button type="button" class="btn-secondary" id="cancelarAjusteBtn">Cancelar</button>
                     <button type="submit" class="btn-primary">Guardar Ajuste</button>
                 </div>
             </form>
@@ -134,16 +152,30 @@
         </div>
     </div>
 
+    <!-- Modal para Historial de Movimientos -->
     <div id="historialMovimientosModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">×</span>
-            <h2>Historial de Movimientos</h2>
-            <h3 id="historyProductName"></h3>
-            <table class="inventory-table">
-                <thead><tr><th>Fecha</th><th>Tipo</th><th>Cantidad</th><th>Stock Resultante</th><th>Motivo</th></tr></thead>
-                <tbody><tr><td colspan="5">Ejemplo: 2024-03-15 | Entrada | +50 | 150 | Compra a proveedor</td></tr></tbody>
-            </table>
+    <div class="modal-content">
+        <span class="close-btn">×</span>
+        <h2>Historial de Movimientos</h2>
+        <h3 id="historyProductName"></h3> <!-- El nombre del producto irá aquí -->
+        <div class="inventory-table-container">
+        <table class="inventory-table">
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Cantidad</th>
+                <th>Stock Resultante</th>
+                <th>Motivo</th>
+            </tr>
+            </thead>
+            <!-- AÑADIMOS UN ID AQUÍ -->
+            <tbody id="history-table-body-modal">
+            <!-- El historial real se insertará aquí con JS -->
+            </tbody>
+        </table>
         </div>
+    </div>
     </div>
 
     <footer>© 2025 Mass - Todos los derechos reservados</footer>

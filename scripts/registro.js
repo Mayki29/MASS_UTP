@@ -47,23 +47,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const validarDNI = () => {
+    // ¡NUEVA VERSIÓN MEJORADA (DNI y RUC)!
+    const validarDniRuc = () => {
         let valor = dniInput.value;
-        // Reemplaza cualquier caracter que no sea un número
+        // 1. Limpiar cualquier caracter no numérico (esto no cambia)
         dniInput.value = valor.replace(/[^0-9]/g, '');
         
-        valor = dniInput.value; // Re-evaluar después de la limpieza
-        
-        if (valor.length !== 8) {
-            mostrarError(dniInput, 'El DNI debe tener 8 dígitos.');
+        valor = dniInput.value; // Re-evaluar el valor después de la limpieza
+
+        // 2. Comprobar si está vacío (validación básica)
+        if (valor.length === 0) {
+            mostrarError(dniInput, 'Este campo es obligatorio.');
             return false;
-        } else if (clientes.some(cliente => cliente.dni === valor)) {
-            mostrarError(dniInput, 'Este DNI ya está registrado.');
-            return false;
-        } else {
-            mostrarExito(dniInput);
-            return true;
         }
+
+        // 3. Comprobar si la longitud es 8 (DNI) O 11 (RUC)
+        if (valor.length !== 8 && valor.length !== 11) {
+            mostrarError(dniInput, 'Debe ingresar un DNI (8 dígitos) o RUC (11 dígitos).');
+            return false;
+        }
+
+        // 4. Comprobar si ya está registrado
+        if (clientes.some(cliente => cliente.dni === valor)) {
+            mostrarError(dniInput, 'Este DNI/RUC ya está registrado.');
+            return false;
+        }
+
+        // 5. Si todo está bien, mostrar éxito
+        mostrarExito(dniInput);
+        return true;
     };
 
     const validarEmail = () => {
@@ -85,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nombresInput.addEventListener('input', () => validarNombresApellidos(nombresInput));
     apellidosInput.addEventListener('input', () => validarNombresApellidos(apellidosInput));
-    dniInput.addEventListener('input', validarDNI);
+    dniInput.addEventListener('input', validarDniRuc);
     emailInput.addEventListener('input', validarEmail);
 
     // --- EVENT LISTENER PARA EL ENVÍO DEL FORMULARIO ---
@@ -96,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ejecutar todas las validaciones una última vez antes de enviar
         const esNombreValido = validarNombresApellidos(nombresInput);
         const esApellidoValido = validarNombresApellidos(apellidosInput);
-        const esDNIValido = validarDNI();
+        const esDniRucValido = validarDniRuc();
         const esEmailValido = validarEmail();
         
         // Si todas las validaciones son correctas, se procede a registrar
-        if (esNombreValido && esApellidoValido && esDNIValido && esEmailValido) {
+        if (esNombreValido && esApellidoValido && esDniRucValido && esEmailValido) {
             const nuevoCliente = {
                 nombres: nombresInput.value.trim(),
                 apellidos: apellidosInput.value.trim(),
