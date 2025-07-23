@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let descuento = 0;
         let totalFinal = totalSinDescuento;
         if (descuentoActivo) {
-            descuento = totalSinDescuento * 0.05;
+            descuento = totalSinDescuento * 0.10;
             totalFinal = totalSinDescuento - descuento;
             discountRow.style.display = 'flex';
             discountElem.textContent = `- S/ ${descuento.toFixed(2)}`;
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clienteEncontrado = clientesRegistrados.find(cliente => cliente.dni === dniIngresado);
         if (clienteEncontrado) {
             descuentoActivo = true;
-            Swal.fire('¡Cliente Exclusivo!', `Descuento del 5% aplicado para ${clienteEncontrado.nombres}.`, 'success');
+            Swal.fire('¡Cliente Exclusivo!', `Descuento del 10% aplicado para ${clienteEncontrado.nombres}.`, 'success');
         } else {
             descuentoActivo = false;
             if (dniIngresado) {
@@ -229,50 +229,76 @@ document.addEventListener('DOMContentLoaded', () => {
     paymentMethodSelect.addEventListener('change', () => {
         cardDetailsDiv.style.display = paymentMethodSelect.value === 'tarjeta' ? 'block' : 'none';
     });
+    // REEMPLAZA ESTE EVENT LISTENER COMPLETO
+
     paymentForm.addEventListener('submit', (event) => {
         event.preventDefault();
         paymentModal.style.display = 'none';
+        
         Swal.fire({
             icon: 'success', title: 'Venta Completada', toast: true,
             position: 'top-end', showConfirmButton: false, timer: 3000,
             timerProgressBar: true
         });
-        const totalSinDescuento = carrito.reduce((acc, item) => acc + (item.cantidad * item.precio), 0);
-        let descuento = 0;
-        if (descuentoActivo) { descuento = totalSinDescuento * 0.05; }
-        const totalFinal = totalSinDescuento - descuento;
-        const ventaFinalizada = {
-            id: Date.now(), fecha: new Date().toLocaleString('es-PE'),
-            clienteDNI: descuentoActivo ? searchClientInput.value.trim() : null,
-            items: [...carrito], subtotal: totalFinal / 1.18,
-            igv: totalFinal - (totalFinal / 1.18), descuento: descuento, total: totalFinal
-        };
-        // --- ¡NUEVA LÓGICA PARA ACTUALIZAR STOCK! ---
-        // 1. Obtener la lista actual de productos del sistema.
-        let productosActuales = JSON.parse(localStorage.getItem('productos')) || [];
 
-        // 2. Recorrer el carrito vendido.
+        // --- LÓGICA DE VENTA UNIFICADA ---
+
+        // 1. Crear el objeto de la venta final
+        const totalSinDescuento = carrito.reduce((acc, item) => acc + (parseFloat(item.precio) * item.cantidad), 0);
+        let descuento = 0;
+        if (descuentoActivo) {
+            descuento = totalSinDescuento * 0.10;
+        }
+        const totalFinal = totalSinDescuento - descuento;
+
+        const ventaFinalizada = {
+            id: Date.now(),
+            fecha: new Date().toLocaleString('es-PE'),
+            clienteDNI: descuentoActivo ? searchClientInput.value.trim() : null,
+            items: [...carrito],
+            subtotal: totalFinal / 1.18,
+            igv: totalFinal - (totalFinal / 1.18),
+            descuento: descuento,
+            total: totalFinal
+        };
+
+        // 2. Cargar todos los datos necesarios de localStorage UNA SOLA VEZ
+        let productosActuales = JSON.parse(localStorage.getItem('productos')) || [];
+        let historialVentas = JSON.parse(localStorage.getItem('historialVentas')) || [];
+        let movimientosStock = JSON.parse(localStorage.getItem('movimientosStock')) || [];
+
+        // 3. Procesar CADA item del carrito UNA SOLA VEZ
         ventaFinalizada.items.forEach(itemVendido => {
-            // 3. Encontrar el producto correspondiente en la lista principal.
+            // Encontrar el producto correspondiente en la lista principal
             const productoEnStock = productosActuales.find(p => p.id === itemVendido.id);
             
             if (productoEnStock) {
-                // 4. Restar la cantidad vendida del stock.
+                // a. ACTUALIZAR STOCK
                 productoEnStock.stock -= itemVendido.cantidad;
+
+                // b. REGISTRAR MOVIMIENTO DE STOCK
+                const nuevoMovimiento = {
+                    id: Date.now() + itemVendido.id,
+                    productoId: itemVendido.id,
+                    fecha: ventaFinalizada.fecha,
+                    tipo: 'Venta',
+                    cantidad: `-${itemVendido.cantidad}`,
+                    stockResultante: productoEnStock.stock,
+                    motivo: `Venta Nro. ${ventaFinalizada.id}`
+                };
+                movimientosStock.push(nuevoMovimiento);
             }
         });
 
-        // 5. Guardar la lista de productos actualizada en localStorage.
+        // 4. Añadir la venta completa al historial
+        historialVentas.push(ventaFinalizada);
+
+        // 5. Guardar TODOS los datos actualizados en localStorage
         localStorage.setItem('productos', JSON.stringify(productosActuales));
-        // --- FIN DE LA NUEVA LÓGICA ---
-        // --- ¡NUEVA LÓGICA PARA GUARDAR EN HISTORIAL! ---
-        // 1. Obtener el historial existente.
-        let historial = JSON.parse(localStorage.getItem('historialVentas')) || [];
-        // 2. Añadir la nueva venta.
-        historial.push(ventaFinalizada);
-        // 3. Guardar el historial actualizado.
-        localStorage.setItem('historialVentas', JSON.stringify(historial));
-        // --- FIN DE LA NUEVA LÓGICA ---
+        localStorage.setItem('historialVentas', JSON.stringify(historialVentas));
+        localStorage.setItem('movimientosStock', JSON.stringify(movimientosStock));
+
+        // 6. Generar el recibo y limpiar para la siguiente venta
         generarRecibo(ventaFinalizada);
         limpiarCarrito();
     });

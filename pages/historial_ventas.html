@@ -57,28 +57,38 @@
         </div>
     </header>
 
+    <!-- pages/historial_ventas.html -->
     <main>
         <div class="container">
             <h1>Historial de Ventas</h1>
+
+            <!-- ¡NUEVO! Contenedor de Filtros -->
+            <div class="filters-container">
+                <input type="text" id="searchInput" placeholder="Buscar por Nro. de Venta...">
+                <select id="dateFilter">
+                    <option value="all">Todo el Historial</option>
+                    <option value="today">Hoy</option>
+                    <option value="this_week">Esta Semana</option>
+                    <option value="this_month">Este Mes</option>
+                </select>
+            </div>
+
             <div class="table-container">
                 <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th>Nro. Venta</th>
-                            <th>Fecha</th>
-                            <th>Cliente (DNI)</th>
-                            <th>N° Items</th>
-                            <th>Total</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
+                    <!-- ... (thead sin cambios) ... -->
                     <tbody id="history-table-body">
                         <!-- Las filas del historial se insertarán aquí -->
                     </tbody>
                 </table>
             </div>
+
+            <!-- ¡NUEVO! Contenedor de Paginación -->
+            <div class="pagination-container" id="pagination">
+                <!-- Los botones de paginación se generarán aquí con JS -->
+            </div>
         </div>
     </main>
+    <!-- ... (resto del HTML: modals, footer, scripts) ... -->
     <div id="detailsModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">×</span>
